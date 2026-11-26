@@ -100,22 +100,35 @@ def normalise_id(value):
 def get_region(value):
     value = clean_text(value)
 
-    prefix = re.match(
-        rf"^[\[\(\s]*(?:({REGION_PATTERN}))"
-        rf"(?:[\]\):|._\-\s]+)",
+    value = re.sub(r"[┃│┆¦｜]", "|", value)
+
+    # Country in brackets, e.g. [UK] or (USA).
+    match = re.search(
+        rf"[\[(]\s*({REGION_PATTERN})\s*[\])]",
         value
     )
 
-    if prefix:
-        return REGIONS[prefix.group(1)]
+    if match:
+        return REGIONS[match.group(1)]
 
-    suffix = re.search(
-        rf"(?:[\s._|(\-]+)({REGION_PATTERN})[\])]*$",
+    # Country prefix, e.g. UK | BBC ONE.
+    match = re.match(
+        rf"^\s*({REGION_PATTERN})"
+        rf"[\s:|._\-]+",
         value
     )
 
-    if suffix:
-        return REGIONS[suffix.group(1)]
+    if match:
+        return REGIONS[match.group(1)]
+
+    # Country suffix, e.g. BBCOne.uk.
+    match = re.search(
+        rf"[\s:|._\-]+({REGION_PATTERN})$",
+        value
+    )
+
+    if match:
+        return REGIONS[match.group(1)]
 
     return ""
 
@@ -123,31 +136,64 @@ def get_region(value):
 def normalise_name(value):
     value = clean_text(value)
 
-    # Preserve +1 timeshift channels.
+    # Standardise provider separators.
+    value = re.sub(r"[┃│┆¦｜]", "|", value)
+
+    # Remove known sports category prefixes.
     value = re.sub(
-        r"\+\s*(\d+)", r" plus\1 ", value
+        r"^\s*(?:ucl|uel|uecl|epl|"
+        r"fifa|uefa)\s*\|\s*",
+        "",
+        value
     )
 
-    # Remove country prefixes and suffixes.
+    # Remove country prefixes.
     value = re.sub(
         rf"^[\[\(\s]*(?:{REGION_PATTERN})"
         rf"[\]\):|._\-\s]+",
-        "", value
+        "",
+        value
     )
 
+    # Remove bracketed country labels.
     value = re.sub(
-        rf"[\s._|(\-]+(?:{REGION_PATTERN})[\])]*$",
-        "", value
+        rf"[\[(]\s*(?:{REGION_PATTERN})"
+        rf"\s*[\])]",
+        "",
+        value
     )
 
-    # Remove video quality labels.
+    # Remove country suffixes.
+    value = re.sub(
+        rf"[\s._|(\-]+(?:{REGION_PATTERN})$",
+        "",
+        value
+    )
+
+    # Remove video quality and codec labels.
     value = re.sub(
         r"\b(?:uhd|fhd|hd|sd|4k|8k|"
-        r"1080p|720p|2160p|hevc|h265|h264)\b",
-        "", value
+        r"1080p|720p|2160p|hevc|"
+        r"h265|h264|50fps|60fps)\b",
+        "",
+        value
     )
 
+    # Preserve plus and timeshift channels.
+    value = value.replace("+", " plus ")
+
+    # Common channel naming variations.
+    value = re.sub(r"\bbbc one\b", "bbc 1", value)
+    value = re.sub(r"\bbbc two\b", "bbc 2", value)
+    value = re.sub(r"\bbbc three\b", "bbc 3", value)
+    value = re.sub(r"\bbbc four\b", "bbc 4", value)
+    value = re.sub(r"\bitv one\b", "itv 1", value)
+
     return re.sub(r"[^a-z0-9]", "", value)
+
+
+
+
 
 
 def compatible_regions(first, second):
