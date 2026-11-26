@@ -3,7 +3,7 @@
 
 # ==========================================================
 # INTELLIGENT SPORTS EPG ENGINE
-# Version 3.1
+# Version 3.2 - Advanced Regional Matching
 # ==========================================================
 
 import os
@@ -17,7 +17,6 @@ import xml.etree.ElementTree as ET
 
 from pathlib import Path
 from collections import defaultdict, Counter
-from difflib import SequenceMatcher
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlsplit
 
@@ -26,6 +25,8 @@ from urllib.parse import urlsplit
 # CONFIGURATION
 # ==========================================================
 
+VERSION = "3.2"
+
 M3U_URL = os.environ.get("M3U_URL", "").strip()
 
 OUTPUT_FILE = Path("epgs/light-epg.xml.gz")
@@ -33,11 +34,7 @@ MAPPING_FILE = Path("channel_mapping.json")
 
 TEST_MODE = True
 
-ENABLE_FUZZY = True
-FUZZY_THRESHOLD = 0.95
-FUZZY_MARGIN = 0.05
-
-MIN_MATCHED_CHANNELS = 75
+MIN_MATCHED_CHANNELS = 400
 MIN_PREVIOUS_COVERAGE = 0.90
 
 DOWNLOAD_TIMEOUT = 60
@@ -45,61 +42,41 @@ DOWNLOAD_TIMEOUT = 60
 NOW = datetime.now(timezone.utc)
 EARLIEST = NOW - timedelta(hours=12)
 
+BASE = "https://epgshare01.online/epgshare01/"
+
 
 # ==========================================================
 # EPG SOURCES
 # ==========================================================
 
-BASE = "https://epgshare01.online/epgshare01/"
-
-SOURCE_FILES = [
-    # Existing working sources
-    "UK1",
-    "IE1",
-    "US2",
-    "US_LOCALS1",
-    "CA2",
-    "AU1",
-    "NZ1",
-    "DE1",
-    "ES1",
-    "FR1",
-    "PT1",
-    "IT1",
-    "NL1",
-    "PL1",
-    "MY1",
-    "SG1",
-    "HK1",
-    "IN1",
-    "BEIN1",
-    "DIRECTVSPORTS1",
-    "SPORTKLUB1",
-    "PEACOCK1",
-
-    # Additional international sources
-    "AR1",
-    "TR1",
-    "BE1",
-    "MX1",
-    "FI1",
-    "BR1",
-    "AT1",
-    "SE1",
-    "DK1",
-    "NO1",
-    "CH1",
-    "ZA1",
-    "NG1",
-    "DUMMY_CHANNELS",
+KNOWN_SOURCES = [
+    "UK1", "IE1", "US2", "US_LOCALS1",
+    "CA2", "AU1", "NZ1", "DE1",
+    "ES1", "FR1", "PT1", "IT1",
+    "NL1", "PL1", "MY1", "SG1",
+    "HK1", "IN1", "BEIN1",
+    "DIRECTVSPORTS1", "SPORTKLUB1",
+    "PEACOCK1", "AR1", "TR1",
+    "MX1", "FI1", "BR1", "AT1",
+    "SE1", "DK1", "NO1", "CH1",
+    "ZA1", "NG1",
 ]
 
-EPG_URLS = [
-    BASE + f"epg_ripper_{name}.xml.gz"
-    for name in SOURCE_FILES
-]
+EXTRA_REGIONS = {
+    "GR", "RO", "RS", "CZ", "HR",
+    "BE", "PK", "HU", "ID", "PH",
+    "AE", "SA", "QA", "EG", "TH",
+    "JP", "KR", "CL", "CO", "PE",
+}
 
-EPG_URLS.append(
+EXTRA_SOURCE_NAMES = {
+    "BEIN",
+    "SPORTKLUB",
+    "DIRECTVSPORTS",
+    "DAZN",
+}
+
+PLUTO_URL = (
     "https://raw.githubusercontent.com/"
     "matthuisman/i.mjh.nz/refs/heads/master/"
     "PlutoTV/all.xml"
@@ -144,12 +121,12 @@ COUNTRIES = {
     "fi": ["fi", "fin", "finland"],
     "gr": ["gr", "gre", "greece"],
     "ro": ["ro", "romania"],
-    "cz": ["cz", "czech republic"],
+    "cz": ["cz", "cze", "czech republic"],
     "hu": ["hu", "hungary"],
-    "hr": ["hr", "croatia"],
-    "rs": ["rs", "serbia"],
+    "hr": ["hr", "cro", "croatia"],
+    "rs": ["rs", "srb", "serbia"],
     "ae": ["ae", "uae"],
-    "sa": ["sa", "saudi arabia"],
+    "sa": ["sa", "ksa", "saudi arabia"],
     "qa": ["qa", "qatar"],
     "eg": ["eg", "egypt"],
     "pk": ["pk", "pakistan"],
@@ -176,23 +153,15 @@ REGION_PATTERN = "|".join(
 
 
 # ==========================================================
-# SPORTS CHANNEL ALIASES
+# GLOBAL ALIASES
 # ==========================================================
 
-ALIASES = {
-    "skysportsmain": "skysportsmainevent",
-    "skysportspremier": "skysportspremierleague",
-    "skysportsepl": "skysportspremierleague",
-    "skysportsf1": "skysportsformula1",
-    "skysportsformulaone": "skysportsformula1",
-
-    "foxsportsone": "foxsports1",
-    "foxsportstwo": "foxsports2",
-    "fs1": "foxsports1",
-    "fs2": "foxsports2",
-
-    "espnone": "espn1",
-    "espntwo": "espn2",
+GLOBAL_ALIASES = {
+    "tntsportsone": "tntsports1",
+    "tntsportstwo": "tntsports2",
+    "tntsportsthree": "tntsports3",
+    "tntsportsfour": "tntsports4",
+    "tntsportsfive": "tntsports5",
 
     "eurosportone": "eurosport1",
     "eurosporttwo": "eurosport2",
@@ -200,40 +169,106 @@ ALIASES = {
     "premiersportsone": "premiersports1",
     "premiersportstwo": "premiersports2",
 
-    "tntsportsone": "tntsports1",
-    "tntsportstwo": "tntsports2",
-    "tntsportsthree": "tntsports3",
-    "tntsportfour": "tntsports4",
-    "tntsportfive": "tntsports5",
-
-    "sportsnetont": "sportsnetontario",
-    "sportsnetpac": "sportsnetpacific",
-
     "bbc1": "bbcone",
     "bbc2": "bbctwo",
     "bbc3": "bbcthree",
     "bbc4": "bbcfour",
     "itvone": "itv1",
-
-    "sporttvone": "sporttv1",
-    "sporttvtwo": "sporttv2",
-
-    "ziggosportselect": "ziggosportselect",
 }
 
 for number in range(1, 11):
 
-    ALIASES[f"bein{number}"] = (
+    GLOBAL_ALIASES[f"bein{number}"] = (
         f"beinsports{number}"
     )
 
-    ALIASES[f"tntsport{number}"] = (
+    GLOBAL_ALIASES[f"tntsport{number}"] = (
         f"tntsports{number}"
     )
 
-    ALIASES[f"skysport{number}"] = (
-        f"skysports{number}"
-    )
+
+# ==========================================================
+# REGION-SPECIFIC ALIASES
+# ==========================================================
+
+REGIONAL_ALIASES = {
+
+    "uk": {
+        "skysportsmain": "skysportsmainevent",
+        "skysportspremier": "skysportspremierleague",
+        "skysportsepl": "skysportspremierleague",
+        "skysportsf1": "skysportsformula1",
+        "skysportsformulaone": "skysportsformula1",
+    },
+
+    "us": {
+        "fs1": "foxsports1",
+        "fs2": "foxsports2",
+        "foxsportsone": "foxsports1",
+        "foxsportstwo": "foxsports2",
+        "espnu": "espnu",
+        "espnone": "espn",
+        "espntwo": "espn2",
+        "espn1": "espn",
+    },
+
+    "ar": {
+        "espnsports": "espn",
+        "espn1": "espn",
+        "foxsportsone": "foxsports1",
+        "foxsportstwo": "foxsports2",
+        "foxsportsthree": "foxsports3",
+        "directvsports": "dsports",
+        "directvsports2": "dsports2",
+        "directvsportsplus": "dsportsplus",
+    },
+
+    "au": {
+        "foxsports501": "foxsports501",
+        "foxsports502": "foxsports502",
+        "foxsports503": "foxsports503",
+        "foxsports504": "foxsports504",
+        "foxsports505": "foxsports505",
+        "foxsports506": "foxsports506",
+        "foxsports507": "foxsports507",
+    },
+
+    "ae": {
+        "dubaisport1": "dubaisports1",
+        "dubaisport2": "dubaisports2",
+        "dubaisport3": "dubaisports3",
+        "adsports1": "abudhabisports1",
+        "adsports2": "abudhabisports2",
+        "adsportpremium1": "abudhabisportspremium1",
+        "adsportpremium2": "abudhabisportspremium2",
+        "adsportspremium1": "abudhabisportspremium1",
+        "adsportspremium2": "abudhabisportspremium2",
+    },
+
+    "br": {
+        "bandsport": "bandsports",
+    },
+
+    "ca": {
+        "sportsnetont": "sportsnetontario",
+        "sportsnetpac": "sportsnetpacific",
+    },
+
+    "pt": {
+        "sporttvone": "sporttv1",
+        "sporttvtwo": "sporttv2",
+    },
+}
+
+for region in ("de", "at"):
+
+    REGIONAL_ALIASES.setdefault(region, {})
+
+    for number in range(1, 11):
+
+        REGIONAL_ALIASES[region][
+            f"skysports{number}"
+        ] = f"skysport{number}"
 
 
 # ==========================================================
@@ -248,9 +283,9 @@ def download(url):
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "Mozilla/5.0 EPG-Engine/3.1",
+            "User-Agent": f"Mozilla/5.0 EPG/{VERSION}",
             "Accept": "*/*",
-        }
+        },
     )
 
     with urllib.request.urlopen(
@@ -267,6 +302,79 @@ def download(url):
 
 
 # ==========================================================
+# AUTOMATIC SOURCE DISCOVERY
+# ==========================================================
+
+def discover_sources():
+
+    sources = set(KNOWN_SOURCES)
+
+    print("\nDiscovering additional EPG sources...")
+
+    try:
+
+        page = download(BASE).decode(
+            "utf-8",
+            errors="replace"
+        )
+
+        available = set(
+            re.findall(
+                r"epg_ripper_([A-Z0-9_]+)\.xml\.gz",
+                page
+            )
+        )
+
+        for name in available:
+
+            match = re.match(
+                r"^([A-Z]{2})(?:\d|_)",
+                name
+            )
+
+            if match:
+
+                country = match.group(1)
+
+                if country in EXTRA_REGIONS:
+                    sources.add(name)
+
+            if any(
+                name.startswith(prefix)
+                for prefix in EXTRA_SOURCE_NAMES
+            ):
+
+                sources.add(name)
+
+        # Exclude generic placeholder schedules.
+        sources.discard("DUMMY_CHANNELS")
+
+        print(
+            f"Discovered source files: {len(available)}"
+        )
+
+    except Exception as error:
+
+        print(
+            "Source discovery unavailable: "
+            f"{type(error).__name__}"
+        )
+
+        print("Using known working sources.")
+
+    urls = [
+        BASE + f"epg_ripper_{name}.xml.gz"
+        for name in sorted(sources)
+    ]
+
+    urls.append(PLUTO_URL)
+
+    print(f"Configured EPG sources: {len(urls)}")
+
+    return urls
+
+
+# ==========================================================
 # TEXT NORMALISATION
 # ==========================================================
 
@@ -277,8 +385,8 @@ def clean_text(value):
     value = unicodedata.normalize("NFKD", value)
 
     value = "".join(
-        c for c in value
-        if not unicodedata.combining(c)
+        char for char in value
+        if not unicodedata.combining(char)
     )
 
     value = value.casefold().strip()
@@ -295,9 +403,11 @@ def safe_text(value):
     )
 
 
-def get_region(value):
+def region_candidates(value):
 
     value = clean_text(value)
+
+    found = set()
 
     patterns = [
         rf"[\[(]\s*({REGION_PATTERN})\s*[\])]",
@@ -305,15 +415,27 @@ def get_region(value):
         rf"^\s*({REGION_PATTERN})"
         rf"\s*[:|._\-]+\s*",
 
-        rf"[._|]\s*({REGION_PATTERN})$",
+        rf"[._|]\s*({REGION_PATTERN})"
+        rf"(?:\d+)?$",
     ]
 
     for pattern in patterns:
 
-        match = re.search(pattern, value)
+        for match in re.finditer(pattern, value):
 
-        if match:
-            return REGIONS[match.group(1)]
+            found.add(
+                REGIONS[match.group(1)]
+            )
+
+    return found
+
+
+def get_region(value):
+
+    regions = region_candidates(value)
+
+    if len(regions) == 1:
+        return next(iter(regions))
 
     return ""
 
@@ -327,22 +449,20 @@ def normalise_id(value):
     )
 
 
-def normalise_name(value):
+def normalise_name(value, region=""):
 
-    value = clean_text(value)
-
-    value = value.strip(" |")
+    value = clean_text(value).strip(" |")
 
     # Remove known category prefixes.
     value = re.sub(
         r"^(?:ucl|uel|uecl|epl|uefa|fifa|"
-        r"sports|sport|football|soccer)"
+        r"sports|sport|football|soccer|f1 tv)"
         r"\s*\|\s*",
         "",
         value
     )
 
-    # Remove explicit country prefixes.
+    # Remove explicit country prefix.
     value = re.sub(
         rf"^\s*(?:{REGION_PATTERN})"
         rf"\s*[:|._\-]+\s*",
@@ -358,14 +478,16 @@ def normalise_name(value):
         value
     )
 
-    # Remove country suffixes from EPG IDs.
+    # Remove EPG country suffixes.
+    # Example: ESPN.HD.us2
     value = re.sub(
-        rf"[._|]\s*(?:{REGION_PATTERN})$",
+        rf"[._|]\s*(?:{REGION_PATTERN})"
+        rf"(?:\d+)?$",
         "",
         value
     )
 
-    # Remove encoding and resolution labels.
+    # Remove video resolution and codec labels.
     value = re.sub(
         r"\b(?:uhd|fhd|hd|sd|4k|8k|"
         r"1080p|720p|2160p|hevc|"
@@ -374,6 +496,7 @@ def normalise_name(value):
         value
     )
 
+    # Preserve timeshift and plus channels.
     value = value.replace("+", " plus ")
 
     value = re.sub(
@@ -382,12 +505,17 @@ def normalise_name(value):
         value
     )
 
-    return ALIASES.get(value, value)
+    value = GLOBAL_ALIASES.get(
+        value,
+        value
+    )
 
+    value = REGIONAL_ALIASES.get(
+        region,
+        {}
+    ).get(value, value)
 
-def compatible_regions(first, second):
-
-    return not first or not second or first == second
+    return value
 
 
 def source_region(url):
@@ -398,6 +526,7 @@ def source_region(url):
     )
 
     if match:
+
         return REGIONS.get(
             match.group(1).lower(),
             ""
@@ -408,13 +537,29 @@ def source_region(url):
 
 def is_event_channel(name):
 
-    return bool(
-        re.search(
-            r"event\d*|ppv\d*|match\d+|"
-            r"feed\d+|fixture\d+|"
-            r"redbutton\d*",
-            name
-        )
+    name = clean_text(name)
+
+    # Do not classify Sky Sports Main Event
+    # as a temporary event feed.
+    if re.search(r"main[\s._-]*event", name):
+        return False
+
+    patterns = [
+        r"\bevent[\s._-]*\d+",
+        r"\bppv\b",
+        r"\bmatch[\s._-]*\d+",
+        r"\bfeed[\s._-]*\d+",
+        r"\bfixture[\s._-]*\d+",
+        r"\bred[\s._-]*button\b",
+        r"\bf1[\s._-]*tv[\s._-]*pro\b",
+        r"\bonboard\b",
+        r"\bdriver[\s._-]*cam\b",
+        r"\bparamount\s*\+\s*\d+",
+    ]
+
+    return any(
+        re.search(pattern, name)
+        for pattern in patterns
     )
 
 
@@ -440,6 +585,7 @@ def parse_timestamp(value):
             )
 
             if result.tzinfo is None:
+
                 result = result.replace(
                     tzinfo=timezone.utc
                 )
@@ -467,6 +613,9 @@ def programme_is_fresh(programme):
     if start is None:
         return False
 
+    if programme.get("stop") and stop is None:
+        return False
+
     if stop is not None:
 
         if stop <= start:
@@ -477,18 +626,39 @@ def programme_is_fresh(programme):
     return start >= EARLIEST
 
 
+def programme_is_current_or_future(programme):
+
+    start = parse_timestamp(
+        programme.get("start")
+    )
+
+    stop = parse_timestamp(
+        programme.get("stop")
+    )
+
+    if start is None:
+        return False
+
+    return (
+        stop > NOW
+        if stop is not None
+        else start >= NOW
+    )
+
+
 # ==========================================================
-# READ IPTV PLAYLIST
+# READ PLAYLIST
 # ==========================================================
 
 def read_playlist():
 
     if not M3U_URL:
+
         raise RuntimeError(
             "M3U_URL GitHub secret is missing."
         )
 
-    print("Downloading M3U playlist...")
+    print("\nDownloading M3U playlist...")
 
     content = download(M3U_URL).decode(
         "utf-8-sig",
@@ -496,12 +666,11 @@ def read_playlist():
     )
 
     if not content.lstrip().startswith("#EXTM3U"):
-        raise RuntimeError(
-            "Downloaded file is not an M3U playlist."
-        )
+        raise RuntimeError("Invalid M3U playlist.")
 
     channels = {}
     conflicts = set()
+    region_conflicts = []
 
     for line in content.splitlines():
 
@@ -519,10 +688,7 @@ def read_playlist():
             "tvg-id", ""
         ).strip()
 
-        if not channel_id:
-            continue
-
-        if "://" in channel_id:
+        if not channel_id or "://" in channel_id:
             continue
 
         if channel_id in conflicts:
@@ -561,36 +727,66 @@ def read_playlist():
         if not names:
             continue
 
-        region = (
-            get_region(channel_id)
-            or get_region(tvg_name)
-            or get_region(display_name)
-            or get_region(group)
+        detected_regions = set()
+
+        for name in names:
+
+            detected_regions.update(
+                region_candidates(name)
+            )
+
+        detected_regions.update(
+            region_candidates(channel_id)
         )
 
+        if len(detected_regions) > 1:
+
+            region_conflicts.append(
+                sorted(names)[0]
+            )
+
+            region = ""
+            ambiguous_region = True
+
+        elif detected_regions:
+
+            region = next(
+                iter(detected_regions)
+            )
+
+            ambiguous_region = False
+
+        else:
+
+            region = get_region(group)
+            ambiguous_region = False
+
         keys = {
-            normalise_name(name)
+            normalise_name(name, region)
             for name in names
-            if normalise_name(name)
+            if normalise_name(name, region)
         }
 
         if not keys:
             continue
 
         event = any(
-            is_event_channel(key)
-            for key in keys
+            is_event_channel(name)
+            for name in names
         )
 
         if channel_id in channels:
 
             existing = channels[channel_id]
 
+            region_mismatch = (
+                existing["region"]
+                and region
+                and existing["region"] != region
+            )
+
             if (
-                not compatible_regions(
-                    existing["region"],
-                    region
-                )
+                region_mismatch
                 or not keys.intersection(
                     existing["keys"]
                 )
@@ -603,12 +799,10 @@ def read_playlist():
             existing["names"].update(names)
             existing["keys"].update(keys)
 
-            existing["region"] = (
-                existing["region"] or region
-            )
+            existing["event"] |= event
 
-            existing["event"] = (
-                existing["event"] or event
+            existing["ambiguous_region"] |= (
+                ambiguous_region
             )
 
         else:
@@ -619,6 +813,8 @@ def read_playlist():
                 "keys": keys,
                 "region": region,
                 "event": event,
+                "ambiguous_region":
+                    ambiguous_region,
             }
 
     print(
@@ -629,18 +825,26 @@ def read_playlist():
         f"Conflicting IDs skipped: {len(conflicts)}"
     )
 
-    event_count = sum(
-        channel["event"]
-        for channel in channels.values()
+    print(
+        f"Conflicting region labels: "
+        f"{len(region_conflicts)}"
     )
 
-    print(f"Dedicated event feeds: {event_count}")
+    print(
+        f"Dedicated event feeds: "
+        f"{sum(c['event'] for c in channels.values())}"
+    )
+
+    print("\n===== REGION CONFLICT SAMPLES =====")
+
+    for name in region_conflicts[:15]:
+        print(safe_text(name))
 
     print("\n===== PLAYLIST REGIONS =====")
 
     regions = Counter(
-        channel["region"] or "unknown"
-        for channel in channels.values()
+        c["region"] or "unknown"
+        for c in channels.values()
     )
 
     for region, count in regions.most_common():
@@ -653,32 +857,31 @@ def read_playlist():
 # LOAD EPG SOURCES
 # ==========================================================
 
-def load_epg_sources():
+def load_epg_sources(urls):
 
     entries = []
-    successful = 0
-    failed = 0
-    expired = 0
-    failed_sources = []
 
-    for index, url in enumerate(EPG_URLS, 1):
+    successful = 0
+    failed = []
+    expired = 0
+
+    for index, url in enumerate(urls, 1):
 
         filename = urlsplit(url).path.split("/")[-1]
 
         print(
-            f"\nProcessing EPG source "
-            f"{index}/{len(EPG_URLS)}..."
+            f"\nSource {index}/{len(urls)}: "
+            f"{filename}"
         )
-
-        print(f"Source: {filename}")
 
         try:
 
-            data = download(url)
-            root = ET.fromstring(data)
+            root = ET.fromstring(
+                download(url)
+            )
 
             if root.tag != "tv":
-                raise ValueError("Not XMLTV")
+                raise ValueError("Invalid XMLTV")
 
             programmes = defaultdict(list)
 
@@ -696,6 +899,9 @@ def load_epg_sources():
                     expired += 1
                     continue
 
+                if not programme.findtext("title"):
+                    continue
+
                 programmes[channel_id].append(
                     programme
                 )
@@ -707,10 +913,19 @@ def load_epg_sources():
 
                 channel_id = channel.get("id", "")
 
-                if not channel_id:
+                schedule = programmes.get(
+                    channel_id,
+                    []
+                )
+
+                if not schedule:
                     continue
 
-                if channel_id not in programmes:
+                if not any(
+                    programme_is_current_or_future(p)
+                    for p in schedule
+                ):
+
                     continue
 
                 names = {
@@ -724,28 +939,31 @@ def load_epg_sources():
                 if not channel_id.isdigit():
                     names.add(channel_id)
 
-                if not names:
+                detected = region_candidates(
+                    channel_id
+                )
+
+                if not detected:
+
+                    for name in names:
+
+                        detected.update(
+                            region_candidates(name)
+                        )
+
+                if len(detected) > 1:
                     continue
 
-                region = get_region(channel_id)
-
-                if not region:
-
-                    detected = {
-                        get_region(name)
-                        for name in names
-                        if get_region(name)
-                    }
-
-                    if len(detected) == 1:
-                        region = detected.pop()
-
-                region = region or default_region
+                region = (
+                    next(iter(detected))
+                    if detected
+                    else default_region
+                )
 
                 keys = {
-                    normalise_name(name)
+                    normalise_name(name, region)
                     for name in names
-                    if normalise_name(name)
+                    if normalise_name(name, region)
                 }
 
                 if not keys:
@@ -757,39 +975,44 @@ def load_epg_sources():
                     "keys": keys,
                     "region": region,
                     "source": filename,
-                    "programmes": programmes[channel_id],
+                    "programmes": schedule,
+                    "event": any(
+                        is_event_channel(name)
+                        for name in names
+                    ),
                 })
 
                 count += 1
 
             successful += 1
 
-            print(
-                f"Loaded {count} channels "
-                f"with recent or future programmes."
-            )
+            print(f"Loaded {count} usable EPG entries.")
 
         except Exception as error:
 
-            failed += 1
-            failed_sources.append(filename)
+            failed.append(filename)
 
             print(
-                f"Source unavailable: "
+                "Source unavailable: "
                 f"{type(error).__name__}"
             )
 
     print("\n===== SOURCE RESULTS =====")
+
     print(f"Successful sources: {successful}")
-    print(f"Failed sources: {failed}")
+    print(f"Failed sources: {len(failed)}")
     print(f"Total EPG entries: {len(entries)}")
-    print(f"Expired/invalid programmes removed: {expired}")
 
-    if failed_sources:
+    print(
+        f"Expired/invalid programmes removed: "
+        f"{expired}"
+    )
 
-        print("\nUnavailable source files:")
+    if failed:
 
-        for filename in failed_sources:
+        print("\nUnavailable sources:")
+
+        for filename in failed:
             print(filename)
 
     if not entries:
@@ -799,15 +1022,14 @@ def load_epg_sources():
 
 
 # ==========================================================
-# BUILD MATCHING INDEXES
+# MATCHING INDEXES
 # ==========================================================
 
 def build_indexes(entries):
 
+    names = defaultdict(list)
     exact_ids = defaultdict(list)
     normalised_ids = defaultdict(list)
-    names = defaultdict(list)
-    regional_names = defaultdict(set)
 
     for entry in entries:
 
@@ -827,257 +1049,259 @@ def build_indexes(entries):
 
             names[key].append(entry)
 
-            if entry["region"]:
-
-                regional_names[
-                    entry["region"]
-                ].add(key)
-
     return {
+        "names": names,
         "exact_ids": exact_ids,
         "normalised_ids": normalised_ids,
-        "names": names,
-        "regional_names": regional_names,
     }
 
 
 # ==========================================================
-# OPTIONAL VERIFIED CHANNEL MAPPINGS
+# MANUAL MAPPINGS
 # ==========================================================
 
-def load_verified_mappings():
+def load_mappings():
 
     if not MAPPING_FILE.exists():
 
-        print("No manual channel mapping file found.")
+        print("No manual mapping file found.")
         return {}
 
     try:
 
-        mappings = json.loads(
+        data = json.loads(
             MAPPING_FILE.read_text(
                 encoding="utf-8"
             )
         )
 
-        if not isinstance(mappings, dict):
-            raise ValueError("Invalid mapping format")
+        if not isinstance(data, dict):
+            return {}
 
-        print(
-            f"Loaded {len(mappings)} manual mappings."
-        )
+        print(f"Loaded {len(data)} manual mappings.")
 
-        return mappings
+        return data
 
     except Exception:
 
-        print("Manual mapping file could not be read.")
+        print("Could not read manual mappings.")
         return {}
 
 
 # ==========================================================
-# SELECT BEST MATCH
+# DUPLICATE SOURCE RESOLUTION
 # ==========================================================
 
-def choose_match(candidates, region):
+def schedule_signature(entry):
 
-    candidates = [
-        entry
-        for entry in candidates
-        if compatible_regions(
-            region,
-            entry["region"]
+    signature = set()
+
+    for programme in entry["programmes"]:
+
+        start = parse_timestamp(
+            programme.get("start")
         )
-    ]
+
+        title = clean_text(
+            programme.findtext("title", "")
+        )
+
+        if start and title:
+
+            signature.add(
+                (start, title)
+            )
+
+    return signature
+
+
+def schedules_agree(first, second):
+
+    a = schedule_signature(first)
+    b = schedule_signature(second)
+
+    if not a or not b:
+        return False
+
+    a_times = {start for start, title in a}
+    b_times = {start for start, title in b}
+
+    common_times = a_times & b_times
+
+    if len(common_times) < 3:
+        return False
+
+    agreed = {
+        start
+        for start, title in a & b
+    }
+
+    return len(agreed) / len(common_times) >= 0.90
+
+
+def choose_match(candidates, channel):
+
+    region = channel["region"]
+
+    unique = {}
+
+    for entry in candidates:
+
+        if region and entry["region"] != region:
+            continue
+
+        if channel["event"] != entry["event"]:
+            continue
+
+        identity = (
+            entry["source"],
+            entry["id"],
+        )
+
+        unique[identity] = entry
+
+    candidates = list(unique.values())
 
     if not candidates:
-        return None
+        return None, "no_compatible_candidate"
 
-    if region:
+    if len(candidates) == 1:
+        return candidates[0], "single"
 
-        same_region = [
-            entry
-            for entry in candidates
-            if entry["region"] == region
-        ]
-
-        if same_region:
-            candidates = same_region
-
-    identities = {
-        (
-            entry["id"].casefold(),
-            entry["region"]
-        )
+    regions = {
+        entry["region"]
         for entry in candidates
     }
 
-    # Reject ambiguous matches.
-    if len(identities) != 1:
-        return None
+    if len(regions) != 1:
+        return None, "region_ambiguity"
 
-    return max(
+    ranked = sorted(
         candidates,
-        key=lambda entry: len(
-            entry["programmes"]
-        )
+        key=lambda entry: (
+            len(entry["programmes"]),
+            entry["source"],
+            entry["id"]
+        ),
+        reverse=True
     )
+
+    best = ranked[0]
+
+    # Accept duplicate schedules only when
+    # their programme listings substantially agree.
+    if all(
+        schedules_agree(best, other)
+        for other in ranked[1:]
+    ):
+
+        return best, "duplicate_resolved"
+
+    return None, "schedule_ambiguity"
 
 
 # ==========================================================
-# MATCH CHANNELS
+# CHANNEL MATCHING
 # ==========================================================
 
 def match_channel(channel, indexes, mappings):
 
     channel_id = channel["id"]
     region = channel["region"]
-    keys = channel["keys"]
 
-    # Stage 1: Manually verified mapping.
+    if channel["ambiguous_region"]:
+        return None, "region_conflict", []
+
+    # Manually verified mapping.
     mapping = mappings.get(channel_id)
 
     if isinstance(mapping, dict):
 
-        mapped_id = mapping.get("epg_id", "")
         expected_name = mapping.get("name", "")
+        epg_id = mapping.get("epg_id", "")
 
         if (
-            mapped_id
-            and expected_name
-            and normalise_name(expected_name) in keys
+            expected_name
+            and epg_id
+            and normalise_name(
+                expected_name,
+                region
+            ) in channel["keys"]
         ):
 
-            result = choose_match(
-                indexes["exact_ids"].get(
-                    mapped_id.casefold(),
-                    []
-                ),
-                region
+            candidates = indexes[
+                "exact_ids"
+            ].get(epg_id.casefold(), [])
+
+            result, reason = choose_match(
+                candidates,
+                channel
             )
 
             if result:
-                return result, "manual"
+                return result, "manual", []
 
-    # Stage 2: Exact non-numeric ID.
+    # Exact non-numeric ID.
     if not channel_id.isdigit():
 
-        result = choose_match(
-            indexes["exact_ids"].get(
-                channel_id.casefold(),
-                []
-            ),
-            region
+        candidates = indexes[
+            "exact_ids"
+        ].get(channel_id.casefold(), [])
+
+        result, reason = choose_match(
+            candidates,
+            channel
         )
 
         if result:
-            return result, "exact"
+            return result, "exact", []
 
-        # Stage 3: Normalised ID.
-        result = choose_match(
-            indexes["normalised_ids"].get(
-                normalise_id(channel_id),
-                []
-            ),
-            region
+        candidates = indexes[
+            "normalised_ids"
+        ].get(
+            normalise_id(channel_id),
+            []
+        )
+
+        result, reason = choose_match(
+            candidates,
+            channel
         )
 
         if result:
-            return result, "normalised"
+            return result, "normalised", []
 
-    # Stage 4: Exact normalised channel names.
+    # Exact normalised name.
     candidates = []
 
-    for key in keys:
+    for key in channel["keys"]:
 
         candidates.extend(
             indexes["names"].get(key, [])
         )
 
-    result = choose_match(
+    result, reason = choose_match(
         candidates,
-        region
+        channel
     )
 
     if result:
-        return result, "name"
 
-    # Never guess an event feed.
-    if channel["event"]:
-        return None, None
+        method = (
+            "duplicate_resolved"
+            if reason == "duplicate_resolved"
+            else "name"
+        )
 
-    # Stage 5: Conservative fuzzy matching.
-    if not ENABLE_FUZZY or not region:
-        return None, None
+        return result, method, []
 
-    regional_keys = indexes[
-        "regional_names"
-    ].get(region, set())
+    candidate_ids = sorted({
+        f"{entry['id']} [{entry['region'] or '?'}]"
+        for entry in candidates
+    })
 
-    scores = {}
-
-    for key in keys:
-
-        if len(key) < 6:
-            continue
-
-        numbers = re.findall(r"\d+", key)
-
-        for candidate in regional_keys:
-
-            if is_event_channel(candidate):
-                continue
-
-            if abs(len(key) - len(candidate)) > 3:
-                continue
-
-            if numbers != re.findall(
-                r"\d+", candidate
-            ):
-                continue
-
-            if ("plus" in key) != (
-                "plus" in candidate
-            ):
-                continue
-
-            score = SequenceMatcher(
-                None,
-                key,
-                candidate
-            ).ratio()
-
-            if score >= FUZZY_THRESHOLD:
-
-                scores[candidate] = max(
-                    score,
-                    scores.get(candidate, 0)
-                )
-
-    if not scores:
-        return None, None
-
-    ranked = sorted(
-        scores.items(),
-        key=lambda item: (-item[1], item[0])
-    )
-
-    best_key, best_score = ranked[0]
-
-    if len(ranked) > 1:
-
-        if best_score - ranked[1][1] < FUZZY_MARGIN:
-            return None, None
-
-    result = choose_match(
-        indexes["names"].get(best_key, []),
-        region
-    )
-
-    if result:
-        return result, "fuzzy"
-
-    return None, None
+    # No fuzzy guessing in this version.
+    return None, reason, candidate_ids[:5]
 
 
 # ==========================================================
@@ -1113,13 +1337,13 @@ def clean_programme(programme, channel_id):
         programme.get("stop")
     )
 
-    if start is None:
+    if not start:
         return None
 
     if not programme_is_fresh(programme):
         return None
 
-    new_programme = ET.Element(
+    result = ET.Element(
         "programme",
         {
             "start": start.strftime(
@@ -1131,7 +1355,7 @@ def clean_programme(programme, channel_id):
 
     if stop:
 
-        new_programme.set(
+        result.set(
             "stop",
             stop.strftime(
                 "%Y%m%d%H%M%S +0000"
@@ -1147,7 +1371,7 @@ def clean_programme(programme, channel_id):
             continue
 
         new_child = ET.SubElement(
-            new_programme,
+            result,
             child.tag
         )
 
@@ -1165,10 +1389,10 @@ def clean_programme(programme, channel_id):
 
                 new_child.set(key, value)
 
-    if new_programme.find("title") is None:
+    if not result.findtext("title"):
         return None
 
-    return new_programme
+    return result
 
 
 # ==========================================================
@@ -1177,41 +1401,38 @@ def clean_programme(programme, channel_id):
 
 def generate_epg(channels, entries):
 
-    print("\nBuilding matching indexes...")
-
     indexes = build_indexes(entries)
-    mappings = load_verified_mappings()
+    mappings = load_mappings()
 
     root = ET.Element(
         "tv",
         {
             "generator-info-name":
-                "Intelligent Sports EPG V3.1"
+                f"Intelligent Sports EPG V{VERSION}"
         }
     )
 
     stats = Counter()
-
     regional_totals = Counter()
     regional_matches = Counter()
 
     unmatched = defaultdict(list)
     matched_samples = defaultdict(list)
+    rejected = defaultdict(list)
 
     all_programmes = []
-    unique_epg_channels = set()
+    distinct_epg = set()
 
-    print("Matching IPTV channels...")
+    print("\nMatching IPTV channels...")
 
     for channel_id, channel in channels.items():
 
         region = channel["region"] or "unknown"
+        name = sorted(channel["names"])[0]
 
         regional_totals[region] += 1
 
-        name = sorted(channel["names"])[0]
-
-        entry, method = match_channel(
+        entry, method, candidates = match_channel(
             channel,
             indexes,
             mappings
@@ -1231,10 +1452,16 @@ def generate_epg(channels, entries):
 
                 unmatched[region].append(name)
 
+            if candidates:
+
+                rejected[region].append(
+                    (name, method, candidates)
+                )
+
             continue
 
-        seen = set()
         valid_programmes = []
+        seen = set()
 
         for programme in entry["programmes"]:
 
@@ -1269,7 +1496,7 @@ def generate_epg(channels, entries):
 
             continue
 
-        channel_element = ET.SubElement(
+        element = ET.SubElement(
             root,
             "channel",
             {"id": channel_id}
@@ -1279,12 +1506,12 @@ def generate_epg(channels, entries):
             channel["names"]
         ):
 
-            display = ET.SubElement(
-                channel_element,
+            node = ET.SubElement(
+                element,
                 "display-name"
             )
 
-            display.text = safe_text(display_name)
+            node.text = safe_text(display_name)
 
         all_programmes.extend(valid_programmes)
 
@@ -1296,7 +1523,7 @@ def generate_epg(channels, entries):
         if channel["event"]:
             stats["matched_events"] += 1
 
-        unique_epg_channels.add(
+        distinct_epg.add(
             (
                 entry["id"].casefold(),
                 entry["region"]
@@ -1317,7 +1544,7 @@ def generate_epg(channels, entries):
         root.append(programme)
 
     # ------------------------------------------------------
-    # REGIONAL REPORT
+    # REGIONAL RESULTS
     # ------------------------------------------------------
 
     print("\n===== REGIONAL MATCHING RESULTS =====")
@@ -1326,12 +1553,10 @@ def generate_epg(channels, entries):
 
         matched = regional_matches[region]
 
-        rate = matched / total * 100
-
         print(
             f"{region.upper()}: "
             f"{matched}/{total} matched "
-            f"({rate:.2f}%)"
+            f"({matched / total * 100:.2f}%)"
         )
 
     # ------------------------------------------------------
@@ -1355,7 +1580,7 @@ def generate_epg(channels, entries):
             )
 
     # ------------------------------------------------------
-    # UNMATCHED REGULAR CHANNELS
+    # UNMATCHED SAMPLES
     # ------------------------------------------------------
 
     print(
@@ -1375,9 +1600,51 @@ def generate_epg(channels, entries):
             dict.fromkeys(samples)
         )
 
-        for name in unique_names[:5]:
+        # Avoid reporting five resolution variants
+        # of the same station.
+        displayed = set()
+
+        for name in unique_names:
+
+            key = normalise_name(
+                name,
+                region
+            )
+
+            if key in displayed:
+                continue
+
+            displayed.add(key)
 
             print(safe_text(name))
+
+            if len(displayed) >= 10:
+                break
+
+    # ------------------------------------------------------
+    # REJECTED CANDIDATES
+    # ------------------------------------------------------
+
+    print("\n===== REJECTED MATCH CANDIDATES =====")
+
+    for region, samples in sorted(
+        rejected.items()
+    ):
+
+        print(f"\n[{region.upper()}]")
+
+        for name, reason, candidates in samples[:5]:
+
+            print(
+                f"{safe_text(name)} | {reason}"
+            )
+
+            for candidate in candidates:
+
+                print(
+                    f"  Candidate: "
+                    f"{safe_text(candidate)}"
+                )
 
     # ------------------------------------------------------
     # FINAL STATISTICS
@@ -1386,17 +1653,20 @@ def generate_epg(channels, entries):
     total = len(channels)
     matched = stats["matched"]
 
-    rate = matched / total * 100 if total else 0
-
-    total_events = sum(
-        channel["event"]
-        for channel in channels.values()
+    events = sum(
+        c["event"]
+        for c in channels.values()
     )
 
-    regular_total = total - total_events
+    regular_total = total - events
 
     regular_matched = (
         matched - stats["matched_events"]
+    )
+
+    rate = (
+        matched / total * 100
+        if total else 0
     )
 
     regular_rate = (
@@ -1416,23 +1686,24 @@ def generate_epg(channels, entries):
     )
 
     print(
-        f"Channel name matches: {stats['name']}"
+        f"Channel name matches: "
+        f"{stats['name']}"
     )
 
     print(
-        f"Fuzzy name matches: {stats['fuzzy']}"
+        f"Duplicate source matches resolved: "
+        f"{stats['duplicate_resolved']}"
     )
 
     print(f"Total matched channels: {matched}")
 
     print(
-        f"Distinct EPG channel identities: "
-        f"{len(unique_epg_channels)}"
+        f"Distinct EPG identities: "
+        f"{len(distinct_epg)}"
     )
 
     print(f"Unmatched channels: {total - matched}")
-
-    print(f"Total event feeds: {total_events}")
+    print(f"Total event feeds: {events}")
 
     print(
         f"Matched event feeds: "
@@ -1451,7 +1722,11 @@ def generate_epg(channels, entries):
 
     print(f"Total programmes: {len(all_programmes)}")
     print(f"Match rate: {rate:.2f}%")
-    print(f"Regular channel match rate: {regular_rate:.2f}%")
+
+    print(
+        f"Regular channel match rate: "
+        f"{regular_rate:.2f}%"
+    )
 
     print("======================================")
 
@@ -1459,7 +1734,7 @@ def generate_epg(channels, entries):
 
 
 # ==========================================================
-# QUALITY PROTECTION
+# PUBLICATION QUALITY PROTECTION
 # ==========================================================
 
 def previous_channel_count():
@@ -1479,15 +1754,27 @@ def save_epg(root):
     new_count = len(root.findall("channel"))
     old_count = previous_channel_count()
 
-    print("\n===== QUALITY CHECK =====")
-    print(f"Previous EPG channels: {old_count}")
-    print(f"New EPG channels: {new_count}")
+    programme_count = len(
+        root.findall("programme")
+    )
 
     quality_ok = (
         new_count >= MIN_MATCHED_CHANNELS
         and new_count >= (
             old_count * MIN_PREVIOUS_COVERAGE
         )
+        and programme_count > 0
+    )
+
+    print("\n===== QUALITY CHECK =====")
+
+    print(f"Previous EPG channels: {old_count}")
+    print(f"New EPG channels: {new_count}")
+    print(f"Programme listings: {programme_count}")
+
+    print(
+        f"Quality check: "
+        f"{'PASSED' if quality_ok else 'FAILED'}"
     )
 
     xml_data = ET.tostring(
@@ -1502,12 +1789,6 @@ def save_epg(root):
     if TEST_MODE:
 
         print("\nTEST MODE ENABLED.")
-
-        print(
-            f"Quality check: "
-            f"{'PASSED' if quality_ok else 'FAILED'}"
-        )
-
         print("Existing EPG preserved.")
         print("Test completed.")
 
@@ -1516,7 +1797,7 @@ def save_epg(root):
     if not quality_ok:
 
         raise RuntimeError(
-            "Coverage quality check failed. "
+            "Quality check failed. "
             "Existing EPG preserved."
         )
 
@@ -1536,9 +1817,11 @@ def save_epg(root):
     )
 
     temp_file.write_bytes(compressed)
+
     temp_file.replace(OUTPUT_FILE)
 
     print("\n===== EPG SAVED =====")
+
     print(f"File: {OUTPUT_FILE}")
 
     print(
@@ -1556,21 +1839,19 @@ def save_epg(root):
 def main():
 
     print("=" * 50)
-    print("INTELLIGENT SPORTS EPG ENGINE V3.1")
+    print(f"INTELLIGENT SPORTS EPG ENGINE V{VERSION}")
     print("=" * 50)
 
     print(f"Test mode: {TEST_MODE}")
-
-    print(
-        f"Configured EPG sources: {len(EPG_URLS)}"
-    )
 
     channels = read_playlist()
 
     if not channels:
         raise RuntimeError("No usable IPTV channels.")
 
-    entries = load_epg_sources()
+    urls = discover_sources()
+
+    entries = load_epg_sources(urls)
 
     root = generate_epg(
         channels,
