@@ -26,3 +26,12 @@ jobs:
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
         run: python update_epg.py
+
+      - name: Upload EPG diagnostic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: EPG-V33-Diagnostics
+          path: reports/
+          retention-days: 7
+          if-no-files-found: warn
