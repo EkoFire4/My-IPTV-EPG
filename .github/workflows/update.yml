@@ -2,24 +2,19 @@
 name: Automatic EPG Update
 
 on:
-  schedule:
-    - cron: '0 0,6,12,18 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: epg-update
-  cancel-in-progress: false
+  contents: read
 
 jobs:
   update-epg:
+    if: github.ref == 'refs/heads/development-v3.3'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-      - name: Checkout repository
+      - name: Checkout development branch
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -27,19 +22,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Generate EPG
+      - name: Run development EPG engine
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
         run: python update_epg.py
-
-      - name: Save updated EPG
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add epgs/light-epg.xml.gz
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Automatic EPG update"
-            git push
-          fi
