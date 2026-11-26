@@ -22,16 +22,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run development EPG engine
+      - name: Check Python syntax
+        run: |
+          python -m py_compile epg_engine_v32.py
+          python -m py_compile epg_engine_v33.py
+          python -m py_compile update_epg.py
+
+      - name: Run V3.4 development engine
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
         run: python update_epg.py
 
-      - name: Upload EPG diagnostic report
+      - name: Upload V3.4 diagnostic reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: EPG-V33-Diagnostics
+          name: EPG-V34-Diagnostics
           path: reports/
           retention-days: 7
           if-no-files-found: warn
