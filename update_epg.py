@@ -1,8 +1,16 @@
 
+#!/usr/bin/env python3
+
+# ==========================================================
+# SPORTS-OPTIMISED IPTV EPG ENGINE
+# Version 3.0
+# ==========================================================
+
 import os
 import re
 import gzip
 import copy
+import html
 import unicodedata
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -10,99 +18,315 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from collections import defaultdict
 from difflib import SequenceMatcher
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 
-# ==========================================
-# EPG SOURCES
-# ==========================================
+# ==========================================================
+# CONFIGURATION
+# ==========================================================
 
-URLS = [
-    "https://epgshare01.online/epgshare01/epg_ripper_US2.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_US_LOCALS1.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_CA2.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_UK1.xml.gz",
-    "https://epgshare01.online/epgshare01/epg_ripper_DUMMY_CHANNELS.xml.gz",
-    "https://raw.githubusercontent.com/matthuisman/i.mjh.nz/refs/heads/master/PlutoTV/all.xml",
-]
+M3U_URL = os.environ.get("M3U_URL", "").strip()
 
 OUTPUT_FILE = Path("epgs/light-epg.xml.gz")
 
+# True = test without replacing existing EPG.
+# False = publish the updated EPG.
+TEST_MODE = True
+
+ENABLE_FUZZY = True
 FUZZY_THRESHOLD = 0.94
 FUZZY_MARGIN = 0.05
-ENABLE_FUZZY = True
+
+MIN_MATCHED_CHANNELS = 75
+MIN_PREVIOUS_COVERAGE = 0.90
+
+DOWNLOAD_TIMEOUT = 120
+
+
+# ==========================================================
+# EPG SOURCES
+# ==========================================================
+
+BASE = "https://epgshare01.online/epgshare01/"
+
+SOURCE_FILES = [
+    # UK and Ireland
+    "UK1",
+    "IE1",
+
+    # USA and Canada
+    "US2",
+    "US_LOCALS1",
+    "CA2",
+
+    # Australia and New Zealand
+    "AU1",
+    "NZ1",
+
+    # Europe
+    "DE1",
+    "ES1",
+    "FR1",
+    "PT1",
+    "IT1",
+    "NL1",
+    "PL1",
+
+    # Asia
+    "MY1",
+    "SG1",
+    "HK1",
+    "IN1",
+
+    # Additional sports sources
+    "BEIN1",
+    "DIRECTVSPORTS1",
+    "SPORTKLUB1",
+    "PEACOCK1",
+]
+
+EPG_URLS = [
+    BASE + f"epg_ripper_{name}.xml.gz"
+    for name in SOURCE_FILES
+]
+
+EPG_URLS.append(
+    "https://raw.githubusercontent.com/"
+    "matthuisman/i.mjh.nz/refs/heads/master/"
+    "PlutoTV/all.xml"
+)
+
+
+# ==========================================================
+# COUNTRY RECOGNITION
+# ==========================================================
 
 REGIONS = {
     "uk": "uk",
     "gb": "uk",
     "united kingdom": "uk",
+    "england": "uk",
+    "britain": "uk",
+
     "us": "us",
     "usa": "us",
     "united states": "us",
+    "america": "us",
+
     "ca": "ca",
     "canada": "ca",
-    "ng": "ng",
-    "nigeria": "ng",
+
+    "au": "au",
+    "aus": "au",
+    "australia": "au",
+
+    "nz": "nz",
+    "new zealand": "nz",
+
     "ie": "ie",
     "ireland": "ie",
-    "au": "au",
-    "australia": "au",
+
+    "de": "de",
+    "ger": "de",
+    "germany": "de",
+
+    "es": "es",
+    "spain": "es",
+
+    "fr": "fr",
+    "france": "fr",
+
+    "pt": "pt",
+    "portugal": "pt",
+
+    "it": "it",
+    "italy": "it",
+
+    "nl": "nl",
+    "netherlands": "nl",
+
+    "pl": "pl",
+    "poland": "pl",
+
+    "my": "my",
+    "malaysia": "my",
+
+    "sg": "sg",
+    "singapore": "sg",
+
+    "hk": "hk",
+    "hong kong": "hk",
+
+    "in": "in",
+    "india": "in",
+
+    "ng": "ng",
+    "nigeria": "ng",
+
+    "za": "za",
+    "south africa": "za",
+
+    "tr": "tr",
+    "turkey": "tr",
+
+    "br": "br",
+    "brazil": "br",
+
+    "mx": "mx",
+    "mexico": "mx",
+
+    "ar": "ar",
+    "argentina": "ar",
+
+    "be": "be",
+    "belgium": "be",
+
+    "ch": "ch",
+    "switzerland": "ch",
+
+    "at": "at",
+    "austria": "at",
+
+    "se": "se",
+    "sweden": "se",
+
+    "no": "no",
+    "norway": "no",
+
+    "dk": "dk",
+    "denmark": "dk",
+
+    "fi": "fi",
+    "finland": "fi",
 }
 
 REGION_PATTERN = "|".join(
-    sorted(REGIONS, key=len, reverse=True)
+    re.escape(x)
+    for x in sorted(REGIONS, key=len, reverse=True)
 )
 
 
-# ==========================================
-# DOWNLOAD FILES
-# ==========================================
+# ==========================================================
+# SPORTS CHANNEL ALIASES
+# ==========================================================
+
+ALIASES = {
+    "skysportsmain": "skysportsmainevent",
+    "skysportsmainevent": "skysportsmainevent",
+
+    "skysportspremier": "skysportspremierleague",
+    "skysportsepl": "skysportspremierleague",
+
+    "skysportsf1": "skysportsformula1",
+    "skysportsformulaone": "skysportsformula1",
+
+    "skysportsnews": "skysportsnews",
+    "skysportsfootball": "skysportsfootball",
+
+    "foxsportsone": "foxsports1",
+    "foxsportstwo": "foxsports2",
+    "fs1": "foxsports1",
+    "fs2": "foxsports2",
+
+    "espnone": "espn1",
+    "espntwo": "espn2",
+
+    "bein1": "beinsports1",
+    "bein2": "beinsports2",
+    "bein3": "beinsports3",
+    "bein4": "beinsports4",
+    "bein5": "beinsports5",
+
+    "eurosportone": "eurosport1",
+    "eurosporttwo": "eurosport2",
+
+    "premiersportsone": "premiersports1",
+    "premiersportstwo": "premiersports2",
+
+    "tntsportsone": "tntsports1",
+    "tntsportstwo": "tntsports2",
+    "tntsportsthree": "tntsports3",
+    "tntsportsfour": "tntsports4",
+
+    "sportsnetont": "sportsnetontario",
+    "sportsnetpac": "sportsnetpacific",
+
+    "bbc1": "bbcone",
+    "bbc2": "bbctwo",
+    "itvone": "itv1",
+}
+
+
+# ==========================================================
+# DOWNLOAD FUNCTIONS
+# ==========================================================
 
 def download(url):
+
     if urlsplit(url).scheme not in ("http", "https"):
-        raise ValueError("Unsupported URL")
+        raise ValueError("Unsupported URL scheme")
 
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "Mozilla/5.0"}
+        headers={
+            "User-Agent": "Mozilla/5.0 IPTV-EPG/3.0",
+            "Accept": "*/*",
+        },
     )
 
     with urllib.request.urlopen(
-        request, timeout=120
+        request,
+        timeout=DOWNLOAD_TIMEOUT
     ) as response:
+
         data = response.read()
 
-    if data.startswith(b"\x1f\x8b"):
+    if data[:2] == b"\x1f\x8b":
         data = gzip.decompress(data)
 
     return data
 
 
-# ==========================================
-# CHANNEL NAME NORMALISATION
-# ==========================================
+# ==========================================================
+# TEXT CLEANING
+# ==========================================================
 
 def clean_text(value):
+
+    value = html.unescape(str(value or ""))
+
     value = unicodedata.normalize("NFKD", value)
+
     value = "".join(
         c for c in value
         if not unicodedata.combining(c)
     )
-    return value.casefold().strip()
 
-
-def normalise_id(value):
-    return re.sub(
-        r"[^a-z0-9]", "", clean_text(value)
-    )
-
-
-def get_region(value):
-    value = clean_text(value)
+    value = value.casefold().strip()
 
     value = re.sub(r"[┃│┆¦｜]", "|", value)
 
-    # Country in brackets, e.g. [UK] or (USA).
+    return value
+
+
+def safe_text(value):
+
+    value = str(value or "")
+
+    value = re.sub(
+        r"https?://[^\s]+",
+        "[URL REMOVED]",
+        value
+    )
+
+    return value
+
+
+def get_region(value):
+
+    value = clean_text(value)
+
+    # Bracketed country labels.
     match = re.search(
         rf"[\[(]\s*({REGION_PATTERN})\s*[\])]",
         value
@@ -111,9 +335,9 @@ def get_region(value):
     if match:
         return REGIONS[match.group(1)]
 
-    # Country prefix, e.g. UK | BBC ONE.
+    # Country prefix.
     match = re.match(
-        rf"^\s*({REGION_PATTERN})"
+        rf"^[\s|]*({REGION_PATTERN})"
         rf"[\s:|._\-]+",
         value
     )
@@ -121,7 +345,7 @@ def get_region(value):
     if match:
         return REGIONS[match.group(1)]
 
-    # Country suffix, e.g. BBCOne.uk.
+    # Country suffix.
     match = re.search(
         rf"[\s:|._\-]+({REGION_PATTERN})$",
         value
@@ -133,23 +357,33 @@ def get_region(value):
     return ""
 
 
+def normalise_id(value):
+
+    return re.sub(
+        r"[^a-z0-9]",
+        "",
+        clean_text(value)
+    )
+
+
 def normalise_name(value):
+
     value = clean_text(value)
 
-    # Standardise provider separators.
-    value = re.sub(r"[┃│┆¦｜]", "|", value)
+    # Remove leading separators.
+    value = value.strip(" |")
 
-    # Remove known sports category prefixes.
+    # Remove known competition/category prefixes.
     value = re.sub(
-        r"^\s*(?:ucl|uel|uecl|epl|"
-        r"fifa|uefa)\s*\|\s*",
+        r"^(?:ucl|uel|uecl|epl|uefa|fifa)"
+        r"\s*\|\s*",
         "",
         value
     )
 
     # Remove country prefixes.
     value = re.sub(
-        rf"^[\[\(\s]*(?:{REGION_PATTERN})"
+        rf"^[\[\(\s|]*(?:{REGION_PATTERN})"
         rf"[\]\):|._\-\s]+",
         "",
         value
@@ -163,14 +397,7 @@ def normalise_name(value):
         value
     )
 
-    # Remove country suffixes.
-    value = re.sub(
-        rf"[\s._|(\-]+(?:{REGION_PATTERN})$",
-        "",
-        value
-    )
-
-    # Remove video quality and codec labels.
+    # Remove video quality labels.
     value = re.sub(
         r"\b(?:uhd|fhd|hd|sd|4k|8k|"
         r"1080p|720p|2160p|hevc|"
@@ -179,111 +406,141 @@ def normalise_name(value):
         value
     )
 
+    value = value.strip()
+
+    # Remove country suffixes.
+    value = re.sub(
+        rf"[\s._|\-]+(?:{REGION_PATTERN})$",
+        "",
+        value
+    )
+
     # Preserve plus and timeshift channels.
     value = value.replace("+", " plus ")
 
-    # Common channel naming variations.
-    value = re.sub(r"\bbbc one\b", "bbc 1", value)
-    value = re.sub(r"\bbbc two\b", "bbc 2", value)
-    value = re.sub(r"\bbbc three\b", "bbc 3", value)
-    value = re.sub(r"\bbbc four\b", "bbc 4", value)
-    value = re.sub(r"\bitv one\b", "itv 1", value)
+    value = re.sub(
+        r"[^a-z0-9]",
+        "",
+        value
+    )
 
-    return re.sub(r"[^a-z0-9]", "", value)
-
-
-
-
+    return ALIASES.get(value, value)
 
 
 def compatible_regions(first, second):
-    return not first or not second or first == second
+
+    if first and second:
+        return first == second
+
+    return True
 
 
 def source_region(url):
-    value = url.lower()
 
-    if "ripper_uk" in value:
-        return "uk"
-    if "ripper_us" in value:
-        return "us"
-    if "ripper_ca" in value:
-        return "ca"
-    if "ripper_ng" in value:
-        return "ng"
+    match = re.search(
+        r"epg_ripper_([A-Z]{2})(?:\d|_)",
+        url
+    )
+
+    if match:
+        return REGIONS.get(
+            match.group(1).lower(),
+            ""
+        )
 
     return ""
 
 
-# ==========================================
-# READ PRIVATE IPTV PLAYLIST
-# ==========================================
+def is_event_channel(name):
+
+    return bool(
+        re.search(
+            r"event\d*|"
+            r"ppv\d*|"
+            r"match\d+|"
+            r"feed\d+|"
+            r"fixture\d+",
+            name
+        )
+    )
+
+
+# ==========================================================
+# READ IPTV PLAYLIST
+# ==========================================================
 
 def read_playlist():
-    m3u_url = os.environ.get("M3U_URL", "").strip()
 
-    if not m3u_url:
-        raise SystemExit("ERROR: M3U_URL secret is missing.")
+    if not M3U_URL:
+        raise RuntimeError(
+            "M3U_URL GitHub secret is missing."
+        )
 
     print("Downloading private M3U playlist...")
 
-    try:
-        playlist = download(m3u_url).decode(
-            "utf-8-sig", errors="replace"
+    content = download(M3U_URL).decode(
+        "utf-8-sig",
+        errors="replace"
+    )
+
+    if not content.lstrip().startswith("#EXTM3U"):
+        raise RuntimeError(
+            "Downloaded file is not an M3U playlist."
         )
-    except Exception:
-        raise SystemExit(
-            "ERROR: Unable to download playlist."
-        ) from None
 
     channels = {}
     conflicts = set()
-    provider_urls = []
 
-    for line in playlist.splitlines():
-        line = line.strip()
-
-        if line.startswith("#EXTM3U"):
-            matches = re.findall(
-                r'(?:x-tvg-url|url-tvg|tvg-url)'
-                r'\s*=\s*"([^"]+)"',
-                line,
-                re.IGNORECASE
-            )
-
-            for match in matches:
-                for url in match.split(","):
-                    url = urljoin(m3u_url, url.strip())
-
-                    if urlsplit(url).scheme in ("http", "https"):
-                        provider_urls.append(url)
+    for line in content.splitlines():
 
         if not line.startswith("#EXTINF"):
             continue
 
-        attributes = {
-            key.lower(): value
-            for key, value in re.findall(
-                r'([\w-]+)\s*=\s*"([^"]*)"',
+        attrs = dict(
+            re.findall(
+                r'([\w-]+)="([^"]*)"',
                 line
             )
-        }
+        )
 
-        channel_id = attributes.get("tvg-id", "").strip()
-        tvg_name = attributes.get("tvg-name", "").strip()
-        display_name = line.rsplit(",", 1)[-1].strip()
+        channel_id = attrs.get(
+            "tvg-id", ""
+        ).strip()
 
         if not channel_id:
             continue
 
-        # Never publish URL-like channel IDs.
-        if "://" in channel_id or "?" in channel_id:
+        if "://" in channel_id:
             continue
 
+        if channel_id in conflicts:
+            continue
+
+        # Locate the display-name comma outside quotes.
+        display_name = ""
+        inside_quotes = False
+
+        for index, char in enumerate(line):
+
+            if char == '"':
+                inside_quotes = not inside_quotes
+
+            elif char == "," and not inside_quotes:
+                display_name = line[index + 1:].strip()
+                break
+
+        tvg_name = attrs.get(
+            "tvg-name", ""
+        ).strip()
+
         names = {
-            name for name in (tvg_name, display_name)
+            html.unescape(name)
+            for name in (tvg_name, display_name)
             if name
         }
+
+        if not names:
+            continue
 
         region = (
             get_region(channel_id)
@@ -291,478 +548,740 @@ def read_playlist():
             or get_region(display_name)
         )
 
+        keys = {
+            normalise_name(name)
+            for name in names
+            if normalise_name(name)
+        }
+
         if channel_id in channels:
-            previous = channels[channel_id]
 
-            old_names = {
-                normalise_name(n)
-                for n in previous["names"]
-            }
+            existing = channels[channel_id]
 
-            new_names = {
-                normalise_name(n) for n in names
+            old_keys = {
+                normalise_name(name)
+                for name in existing["names"]
             }
 
             if (
-                old_names and new_names
-                and not old_names.intersection(new_names)
+                not compatible_regions(
+                    existing["region"],
+                    region
+                )
+                or not keys.intersection(old_keys)
             ):
+
                 conflicts.add(channel_id)
+                channels.pop(channel_id, None)
+                continue
 
-            if not compatible_regions(
-                previous["region"], region
-            ):
-                conflicts.add(channel_id)
+            existing["names"].update(names)
 
-            previous["names"].update(names)
-            continue
+            if not existing["region"]:
+                existing["region"] = region
 
-        channels[channel_id] = {
-            "id": channel_id,
-            "names": names,
-            "region": region,
-        }
+        else:
 
-    for channel_id in conflicts:
-        channels.pop(channel_id, None)
+            channels[channel_id] = {
+                "id": channel_id,
+                "names": names,
+                "region": region,
+            }
 
-    if not channels:
-        raise SystemExit(
-            "ERROR: No usable channel IDs found."
+    print(
+        f"Found {len(channels)} usable channel IDs."
+    )
+
+    print(
+        f"Conflicting IDs skipped: {len(conflicts)}"
+    )
+
+    region_counts = defaultdict(int)
+
+    for channel in channels.values():
+        region_counts[
+            channel["region"] or "unknown"
+        ] += 1
+
+    print("\n===== PLAYLIST REGIONS =====")
+
+    for region, count in sorted(
+        region_counts.items(),
+        key=lambda item: -item[1]
+    ):
+        print(f"{region}: {count}")
+
+    return channels
+
+
+# ==========================================================
+# LOAD EPG SOURCES
+# ==========================================================
+
+def load_epg_sources():
+
+    entries = []
+    successful = 0
+    failed = 0
+
+    for index, url in enumerate(EPG_URLS, 1):
+
+        print(
+            f"\nProcessing EPG source "
+            f"{index}/{len(EPG_URLS)}..."
         )
 
-    print(f"Found {len(channels)} usable channel IDs.")
-    print(f"Conflicting IDs skipped: {len(conflicts)}")
-    print(f"Provider EPG sources detected: {len(provider_urls)}")
-
-    return channels, list(dict.fromkeys(provider_urls))
-
-
-# ==========================================
-# DOWNLOAD AND INDEX EPG SOURCES
-# ==========================================
-
-def load_epg_sources(provider_urls):
-    sources = list(dict.fromkeys(provider_urls + URLS))
-    entries = []
-
-    for index, url in enumerate(sources, start=1):
-        print(f"Processing EPG source {index}/{len(sources)}...")
+        print(
+            f"Source: {urlsplit(url).path.split('/')[-1]}"
+        )
 
         try:
-            root = ET.fromstring(download(url))
+
+            data = download(url)
+            root = ET.fromstring(data)
 
             if root.tag != "tv":
-                raise ValueError("Invalid XMLTV document")
+                raise ValueError("Not an XMLTV file")
 
             programmes = defaultdict(list)
 
             for programme in root.findall("programme"):
-                channel_id = programme.get("channel")
 
-                if channel_id and programme.get("start"):
-                    programmes[channel_id].append(programme)
+                channel_id = programme.get(
+                    "channel", ""
+                )
 
-            added = 0
+                if channel_id:
+                    programmes[channel_id].append(
+                        programme
+                    )
+
+            count = 0
+            default_region = source_region(url)
 
             for channel in root.findall("channel"):
+
                 channel_id = channel.get("id", "")
 
-                if not channel_id or not programmes[channel_id]:
+                if not channel_id:
+                    continue
+
+                if channel_id not in programmes:
                     continue
 
                 names = {
                     node.text.strip()
-                    for node in channel.findall("display-name")
+                    for node in channel.findall(
+                        "display-name"
+                    )
                     if node.text and node.text.strip()
                 }
+
+                if not channel_id.isdigit():
+                    names.add(channel_id)
+
+                if not names:
+                    continue
 
                 region = get_region(channel_id)
 
                 if not region:
-                    for name in sorted(names):
-                        region = get_region(name)
-                        if region:
-                            break
 
-                region = region or source_region(url)
+                    detected = {
+                        get_region(name)
+                        for name in names
+                        if get_region(name)
+                    }
+
+                    if len(detected) == 1:
+                        region = detected.pop()
+
+                region = region or default_region
 
                 entries.append({
                     "id": channel_id,
                     "names": names,
                     "region": region,
-                    "provider": url in provider_urls,
                     "programmes": programmes[channel_id],
                 })
 
-                added += 1
+                count += 1
 
-            print(f"Loaded {added} channels with programmes.")
+            successful += 1
 
-        except Exception:
             print(
-                f"WARNING: EPG source {index} failed. "
-                "Continuing..."
+                f"Loaded {count} channels "
+                f"with programmes."
             )
 
+        except Exception as error:
+
+            failed += 1
+
+            # Do not print raw exceptions or credentials.
+            print(
+                f"Source unavailable: "
+                f"{type(error).__name__}"
+            )
+
+    print("\n===== SOURCE RESULTS =====")
+    print(f"Successful sources: {successful}")
+    print(f"Failed sources: {failed}")
+    print(f"Total EPG entries: {len(entries)}")
+
     if not entries:
-        raise SystemExit("ERROR: No usable EPG sources.")
+        raise RuntimeError(
+            "No usable EPG sources were downloaded."
+        )
 
     return entries
 
 
-# ==========================================
-# BUILD SEARCH INDEXES
-# ==========================================
+# ==========================================================
+# BUILD MATCHING INDEXES
+# ==========================================================
 
 def build_indexes(entries):
-    exact = defaultdict(list)
-    normalised = defaultdict(list)
+
+    exact_ids = defaultdict(list)
+    normalised_ids = defaultdict(list)
     names = defaultdict(list)
     regional_names = defaultdict(set)
 
-    for index, entry in enumerate(entries):
-        exact[entry["id"]].append(index)
+    for entry in entries:
 
-        key = normalise_id(entry["id"])
+        channel_id = entry["id"]
 
-        if key and not key.isdigit():
-            normalised[key].append(index)
+        # Numeric IDs are not globally unique.
+        if not channel_id.isdigit():
+
+            exact_ids[
+                channel_id.casefold()
+            ].append(entry)
+
+            normalised_ids[
+                normalise_id(channel_id)
+            ].append(entry)
 
         for name in entry["names"]:
+
             key = normalise_name(name)
 
             if not key:
                 continue
 
-            names[key].append(index)
+            names[key].append(entry)
 
             if entry["region"]:
-                regional_names[entry["region"]].add(key)
 
-    return exact, normalised, names, regional_names
+                regional_names[
+                    entry["region"]
+                ].add(key)
+
+    return {
+        "exact_ids": exact_ids,
+        "normalised_ids": normalised_ids,
+        "names": names,
+        "regional_names": regional_names,
+    }
 
 
-# ==========================================
-# SELECT SAFE MATCHES
-# ==========================================
+# ==========================================================
+# SELECT BEST MATCH
+# ==========================================================
 
-def choose_match(candidates, channel, entries):
+def choose_match(candidates, region):
+
     candidates = [
-        i for i in set(candidates)
+        entry for entry in candidates
         if compatible_regions(
-            channel["region"], entries[i]["region"]
+            region,
+            entry["region"]
         )
     ]
 
     if not candidates:
         return None
 
-    if channel["region"]:
+    if region:
+
         same_region = [
-            i for i in candidates
-            if entries[i]["region"] == channel["region"]
+            entry for entry in candidates
+            if entry["region"] == region
         ]
 
         if same_region:
             candidates = same_region
 
-    provider = [
-        i for i in candidates
-        if entries[i]["provider"]
-    ]
-
-    if provider:
-        candidates = provider
-
     identities = {
         (
-            entries[i]["id"].casefold(),
-            entries[i]["region"]
+            entry["id"].casefold(),
+            entry["region"]
         )
-        for i in candidates
+        for entry in candidates
     }
 
-    # Skip ambiguous matches rather than assign
-    # an incorrect television schedule.
+    # Avoid ambiguous channel matches.
     if len(identities) != 1:
         return None
 
     return max(
         candidates,
-        key=lambda i: len(entries[i]["programmes"])
+        key=lambda entry: len(
+            entry["programmes"]
+        )
     )
 
 
-def match_channel(channel, entries, indexes):
-    exact, normalised, names, regional_names = indexes
+# ==========================================================
+# MATCH IPTV CHANNELS
+# ==========================================================
+
+def match_channel(channel, indexes):
 
     channel_id = channel["id"]
+    region = channel["region"]
 
-    # Stage 1: Exact ID.
-    candidates = exact.get(channel_id, [])
+    # Stage 1: Exact ID matching.
+    if not channel_id.isdigit():
 
-    # Numeric IDs are only trusted from provider EPGs.
-    if channel_id.isdigit():
-        candidates = [
-            i for i in candidates
-            if entries[i]["provider"]
-        ]
+        result = choose_match(
+            indexes["exact_ids"].get(
+                channel_id.casefold(),
+                []
+            ),
+            region
+        )
 
-    match = choose_match(candidates, channel, entries)
+        if result:
+            return result, "exact"
 
-    if match is not None:
-        return match, "Exact ID"
+        # Stage 2: Normalised ID matching.
+        result = choose_match(
+            indexes["normalised_ids"].get(
+                normalise_id(channel_id),
+                []
+            ),
+            region
+        )
 
-    # Stage 2: Normalised ID.
-    match = choose_match(
-        normalised.get(normalise_id(channel_id), []),
-        channel,
-        entries
-    )
+        if result:
+            return result, "normalised"
 
-    if match is not None:
-        return match, "Normalised ID"
-
-    # Stage 3: Normalised channel name.
-    channel_names = {
+    keys = {
         normalise_name(name)
         for name in channel["names"]
         if normalise_name(name)
     }
 
-    candidates = set()
+    # Stage 3: Channel names and aliases.
+    candidates = []
 
-    for name in channel_names:
-        candidates.update(names.get(name, []))
+    for key in keys:
 
-    match = choose_match(candidates, channel, entries)
+        candidates.extend(
+            indexes["names"].get(key, [])
+        )
 
-    if match is not None:
-        return match, "Channel name"
+    result = choose_match(
+        candidates,
+        region
+    )
+
+    if result:
+        return result, "name"
 
     # Stage 4: Conservative fuzzy matching.
-    # Only compare channels within a known region.
-    if not ENABLE_FUZZY or not channel["region"]:
+    if not ENABLE_FUZZY or not region:
         return None, None
+
+    regional_keys = indexes[
+        "regional_names"
+    ].get(region, set())
 
     scores = {}
 
-    for name in channel_names:
-        if len(name) < 6:
+    for key in keys:
+
+        if len(key) < 6:
             continue
 
-        for candidate in regional_names[channel["region"]]:
-            if abs(len(name) - len(candidate)) > 3:
+        # Do not guess dedicated event feeds.
+        if is_event_channel(key):
+            continue
+
+        key_numbers = re.findall(r"\d+", key)
+
+        for candidate in regional_keys:
+
+            if is_event_channel(candidate):
                 continue
 
-            # Do not confuse channel numbers or +1 variants.
-            if re.findall(r"\d+", name) != re.findall(
+            if abs(len(key) - len(candidate)) > 3:
+                continue
+
+            if key_numbers != re.findall(
                 r"\d+", candidate
             ):
                 continue
 
-            if ("plus" in name) != ("plus" in candidate):
+            if ("plus" in key) != (
+                "plus" in candidate
+            ):
                 continue
 
             score = SequenceMatcher(
-                None, name, candidate
+                None,
+                key,
+                candidate
             ).ratio()
 
-            scores[candidate] = max(
-                scores.get(candidate, 0), score
-            )
+            if score >= FUZZY_THRESHOLD:
+
+                scores[candidate] = max(
+                    score,
+                    scores.get(candidate, 0)
+                )
+
+    if not scores:
+        return None, None
 
     ranked = sorted(
         scores.items(),
-        key=lambda item: item[1],
-        reverse=True
+        key=lambda item: (-item[1], item[0])
     )
 
-    if not ranked or ranked[0][1] < FUZZY_THRESHOLD:
-        return None, None
+    best_key, best_score = ranked[0]
 
-    if (
-        len(ranked) > 1
-        and ranked[0][1] - ranked[1][1] < FUZZY_MARGIN
-    ):
-        return None, None
+    if len(ranked) > 1:
 
-    candidates = [
-        i for i in names[ranked[0][0]]
-        if entries[i]["region"] == channel["region"]
-    ]
+        second_score = ranked[1][1]
 
-    match = choose_match(candidates, channel, entries)
+        if best_score - second_score < FUZZY_MARGIN:
+            return None, None
 
-    if match is not None:
-        return match, "Fuzzy name"
+    result = choose_match(
+        indexes["names"].get(best_key, []),
+        region
+    )
+
+    if result:
+        return result, "fuzzy"
 
     return None, None
 
 
-# ==========================================
-# PRIVACY PROTECTION
-# ==========================================
+# ==========================================================
+# CLEAN PROGRAMME DATA
+# ==========================================================
 
-def safe_text(value):
-    if not value:
-        return ""
+ALLOWED_TAGS = {
+    "title",
+    "sub-title",
+    "desc",
+    "category",
+    "date",
+    "episode-num",
+    "language",
+    "country",
+    "length",
+}
 
-    # Remove embedded web links from published text.
-    return re.sub(
-        r'https?://[^\s<>"\']+',
-        "[link removed]",
-        value,
-        flags=re.IGNORECASE
-    )
+ALLOWED_ATTRIBUTES = {
+    "lang",
+    "system",
+    "units",
+}
 
 
 def clean_programme(programme, channel_id):
-    result = ET.Element("programme")
 
-    for attribute in ("start", "stop"):
-        value = programme.get(attribute)
+    start = programme.get("start", "")
+    stop = programme.get("stop", "")
 
-        if value and re.fullmatch(
-            r"\d{8,14}(?:\s[+-]\d{4})?", value
-        ):
-            result.set(attribute, value)
+    timestamp_pattern = (
+        r"\d{14}(?:\s*[+-]\d{4})?"
+    )
 
-    if not result.get("start"):
+    if not re.fullmatch(
+        timestamp_pattern, start
+    ):
         return None
 
-    result.set("channel", channel_id)
+    if stop and not re.fullmatch(
+        timestamp_pattern, stop
+    ):
+        return None
 
-    # Publish only standard programme metadata.
-    allowed = {
-        "title", "sub-title", "desc", "category",
-        "date", "episode-num", "language",
-        "country", "length"
-    }
+    new_programme = ET.Element(
+        "programme",
+        {
+            "start": start,
+            "channel": channel_id,
+        }
+    )
+
+    if stop:
+        new_programme.set("stop", stop)
 
     for child in programme:
-        if child.tag not in allowed:
+
+        if child.tag not in ALLOWED_TAGS:
             continue
 
-        node = ET.SubElement(result, child.tag)
-        node.text = safe_text(child.text)
+        if not child.text:
+            continue
 
-        for attribute in ("lang", "system", "units"):
-            value = child.get(attribute)
+        new_child = ET.SubElement(
+            new_programme,
+            child.tag
+        )
 
-            if value and re.fullmatch(
-                r"[\w.\-]+", value
+        new_child.text = safe_text(child.text)
+
+        for key, value in child.attrib.items():
+
+            if (
+                key in ALLOWED_ATTRIBUTES
+                and re.fullmatch(
+                    r"[\w.\- ]{1,40}",
+                    value
+                )
             ):
-                node.set(attribute, value)
 
-    return result
+                new_child.set(key, value)
+
+    if new_programme.find("title") is None:
+        return None
+
+    return new_programme
 
 
-# ==========================================
-# GENERATE MATCHED EPG
-# ==========================================
+# ==========================================================
+# GENERATE XMLTV EPG
+# ==========================================================
 
 def generate_epg(channels, entries):
+
+    print("\nBuilding matching indexes...")
+
     indexes = build_indexes(entries)
 
     root = ET.Element(
         "tv",
-        {"generator-info-name": "Smart EPG Updater"}
+        {
+            "generator-info-name":
+                "Sports Optimised EPG V3.0"
+        }
     )
 
     stats = defaultdict(int)
-    programme_count = 0
-    output_programmes = []
+    all_programmes = []
+    unmatched_samples = []
+    matched_samples = []
+
+    print("Matching IPTV channels...")
 
     for channel_id, channel in channels.items():
-        match, method = match_channel(
-            channel, entries, indexes
+
+        entry, method = match_channel(
+            channel,
+            indexes
         )
 
-        if match is None:
-            stats["Unmatched"] += 1
+        if not entry:
+
+            stats["unmatched"] += 1
+
+            if len(unmatched_samples) < 30:
+
+                unmatched_samples.append(
+                    (
+                        sorted(channel["names"])[0],
+                        channel["region"]
+                    )
+                )
+
             continue
 
-        entry = entries[match]
-        programmes = []
         seen = set()
+        valid_programmes = []
 
         for programme in entry["programmes"]:
+
+            cleaned = clean_programme(
+                programme,
+                channel_id
+            )
+
+            if cleaned is None:
+                continue
+
             key = (
-                programme.get("start"),
-                programme.get("stop")
+                cleaned.get("start", ""),
+                cleaned.get("stop", "")
             )
 
             if key in seen:
                 continue
 
-            cleaned = clean_programme(
-                programme, channel_id
-            )
+            seen.add(key)
+            valid_programmes.append(cleaned)
 
-            if cleaned is not None:
-                programmes.append(cleaned)
-                seen.add(key)
+        if not valid_programmes:
 
-        if not programmes:
-            stats["Unmatched"] += 1
+            stats["unmatched"] += 1
             continue
 
-        # Use the ORIGINAL IPTV provider channel ID.
-        output_channel = ET.SubElement(
-            root, "channel", {"id": channel_id}
+        channel_element = ET.SubElement(
+            root,
+            "channel",
+            {"id": channel_id}
         )
 
-        display_name = ET.SubElement(
-            output_channel, "display-name"
-        )
+        for name in sorted(channel["names"]):
 
-        display_name.text = safe_text(
-            sorted(entry["names"])[0]
-            if entry["names"]
-            else channel_id
-        )
+            display = ET.SubElement(
+                channel_element,
+                "display-name"
+            )
 
-        output_programmes.extend(programmes)
+            display.text = safe_text(name)
 
-        programme_count += len(programmes)
+        all_programmes.extend(valid_programmes)
+
         stats[method] += 1
+        stats["matched"] += 1
 
-    for programme in output_programmes:
+        if len(matched_samples) < 20:
+
+            matched_samples.append(
+                (
+                    sorted(channel["names"])[0],
+                    entry["id"],
+                    method
+                )
+            )
+
+    for programme in all_programmes:
         root.append(programme)
 
-    matched = len(channels) - stats["Unmatched"]
+    total = len(channels)
+    matched = stats["matched"]
+
+    rate = (
+        matched / total * 100
+        if total else 0
+    )
+
+    print("\n===== MATCHED CHANNEL SAMPLES =====")
+
+    for name, epg_id, method in matched_samples:
+
+        print(
+            f"{safe_text(name)} -> "
+            f"{safe_text(epg_id)} "
+            f"({method})"
+        )
+
+    print("\n===== UNMATCHED CHANNEL SAMPLES =====")
+
+    for name, region in unmatched_samples:
+
+        print(
+            f"{safe_text(name)} | "
+            f"Region: {region or 'unknown'}"
+        )
 
     print("\n========== MATCHING RESULTS ==========")
-    print(f"Total channel IDs: {len(channels)}")
-    print(f"Exact ID matches: {stats['Exact ID']}")
-    print(f"Normalised ID matches: {stats['Normalised ID']}")
-    print(f"Channel name matches: {stats['Channel name']}")
-    print(f"Fuzzy name matches: {stats['Fuzzy name']}")
-    print(f"Total matched channels: {matched}")
-    print(f"Unmatched channels: {stats['Unmatched']}")
-    print(f"Total programmes: {programme_count}")
-    print(f"Match rate: {matched / len(channels) * 100:.2f}%")
-    print("======================================")
 
-    if not matched or not programme_count:
-        raise SystemExit(
-            "ERROR: No usable matches. "
-            "Existing EPG has not been replaced."
-        )
+    print(f"Total channel IDs: {total}")
+    print(f"Exact ID matches: {stats['exact']}")
+
+    print(
+        f"Normalised ID matches: "
+        f"{stats['normalised']}"
+    )
+
+    print(
+        f"Channel name matches: "
+        f"{stats['name']}"
+    )
+
+    print(
+        f"Fuzzy name matches: "
+        f"{stats['fuzzy']}"
+    )
+
+    print(f"Total matched channels: {matched}")
+    print(f"Unmatched channels: {total - matched}")
+    print(f"Total programmes: {len(all_programmes)}")
+    print(f"Match rate: {rate:.2f}%")
+
+    print("======================================")
 
     return root
 
 
-# ==========================================
-# SAVE COMPRESSED EPG
-# ==========================================
+# ==========================================================
+# EXISTING EPG QUALITY PROTECTION
+# ==========================================================
+
+def previous_channel_count():
+
+    if not OUTPUT_FILE.exists():
+        return 0
+
+    try:
+
+        with gzip.open(
+            OUTPUT_FILE, "rb"
+        ) as file:
+
+            root = ET.parse(file).getroot()
+
+        return len(root.findall("channel"))
+
+    except Exception:
+
+        print(
+            "Could not read existing EPG."
+        )
+
+        return 0
+
 
 def save_epg(root):
-    OUTPUT_FILE.parent.mkdir(
-        parents=True, exist_ok=True
+
+    new_count = len(
+        root.findall("channel")
     )
+
+    old_count = previous_channel_count()
+
+    print("\n===== QUALITY CHECK =====")
+    print(f"Previous EPG channels: {old_count}")
+    print(f"New EPG channels: {new_count}")
+
+    if new_count < MIN_MATCHED_CHANNELS:
+
+        raise RuntimeError(
+            "New EPG is below minimum coverage. "
+            "Existing EPG preserved."
+        )
+
+    if old_count:
+
+        minimum = (
+            old_count * MIN_PREVIOUS_COVERAGE
+        )
+
+        if new_count < minimum:
+
+            raise RuntimeError(
+                "EPG coverage dropped significantly. "
+                "Existing EPG preserved."
+            )
 
     xml_data = ET.tostring(
         root,
@@ -770,56 +1289,89 @@ def save_epg(root):
         xml_declaration=True
     )
 
-    private_url = os.environ.get("M3U_URL", "").strip()
+    if M3U_URL.encode() in xml_data:
 
-    if private_url and private_url.encode() in xml_data:
-        raise SystemExit(
-            "ERROR: Private URL detected in output."
+        raise RuntimeError(
+            "Privacy check failed."
         )
 
-    temporary = OUTPUT_FILE.with_suffix(".gz.tmp")
+    if TEST_MODE:
 
-    temporary.write_bytes(
-        gzip.compress(xml_data, mtime=0)
+        print(
+            "\nTEST MODE ENABLED."
+        )
+
+        print(
+            "Test completed successfully."
+        )
+
+        print(
+            "Existing EPG preserved."
+        )
+
+        return
+
+    OUTPUT_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
     )
 
-    temporary.replace(OUTPUT_FILE)
+    compressed = gzip.compress(
+        xml_data,
+        compresslevel=9,
+        mtime=0
+    )
 
-    size = OUTPUT_FILE.stat().st_size / (1024 * 1024)
+    temp_file = OUTPUT_FILE.with_suffix(
+        ".gz.tmp"
+    )
 
-    print("\nEPG generated successfully!")
-    print(f"Output: {OUTPUT_FILE}")
-    print(f"Compressed size: {size:.2f} MB")
+    temp_file.write_bytes(compressed)
+
+    temp_file.replace(OUTPUT_FILE)
+
+    print("\n===== EPG SAVED =====")
+
+    print(f"File: {OUTPUT_FILE}")
+
+    print(
+        f"Compressed size: "
+        f"{len(compressed) / 1024:.2f} KB"
+    )
+
+    print("EPG update completed successfully.")
 
 
-# ==========================================
-# RUN
-# ==========================================
+# ==========================================================
+# MAIN
+# ==========================================================
+
+def main():
+
+    print("=" * 50)
+    print("SPORTS-OPTIMISED EPG ENGINE V3.0")
+    print("=" * 50)
+
+    print(f"Test mode: {TEST_MODE}")
+    print(f"Configured EPG sources: {len(EPG_URLS)}")
+
+    channels = read_playlist()
+
+    if not channels:
+
+        raise RuntimeError(
+            "No usable IPTV channels found."
+        )
+
+    entries = load_epg_sources()
+
+    root = generate_epg(
+        channels,
+        entries
+    )
+
+    save_epg(root)
 
 
 if __name__ == "__main__":
-    channels, provider_urls = read_playlist()
-    entries = load_epg_sources(provider_urls)
-
-    print("\n===== IPTV CHANNEL SAMPLES =====")
-
-    for channel in list(channels.values())[:50]:
-        print(
-            f"ID: {safe_text(channel['id'])} | "
-            f"Names: {safe_text(str(sorted(channel['names'])))} | "
-            f"Region: {channel['region']} | "
-            f"Cleaned: {safe_text(str([normalise_name(n) for n in channel['names']]))}"
-        )
-
-    print("\n===== EPG CHANNEL SAMPLES =====")
-
-    for entry in entries[:50]:
-        print(
-            f"ID: {safe_text(entry['id'])} | "
-            f"Names: {safe_text(str(sorted(entry['names'])))} | "
-            f"Region: {entry['region']}"
-        )
-
-    root = generate_epg(channels, entries)
-    save_epg(root)
-
+    main()
