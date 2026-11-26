@@ -750,8 +750,30 @@ def save_epg(root):
 # RUN
 # ==========================================
 
+
 if __name__ == "__main__":
     channels, provider_urls = read_playlist()
     entries = load_epg_sources(provider_urls)
+
+    print("\n===== IPTV CHANNEL SAMPLES =====")
+
+    for channel in list(channels.values())[:50]:
+        print(
+            f"ID: {safe_text(channel['id'])} | "
+            f"Names: {safe_text(str(sorted(channel['names'])))} | "
+            f"Region: {channel['region']} | "
+            f"Cleaned: {safe_text(str([normalise_name(n) for n in channel['names']]))}"
+        )
+
+    print("\n===== EPG CHANNEL SAMPLES =====")
+
+    for entry in entries[:50]:
+        print(
+            f"ID: {safe_text(entry['id'])} | "
+            f"Names: {safe_text(str(sorted(entry['names'])))} | "
+            f"Region: {entry['region']}"
+        )
+
     root = generate_epg(channels, entries)
     save_epg(root)
+
