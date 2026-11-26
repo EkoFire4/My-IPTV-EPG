@@ -32,7 +32,7 @@ M3U_URL = os.environ.get("M3U_URL", "").strip()
 OUTPUT_FILE = Path("epgs/light-epg.xml.gz")
 MAPPING_FILE = Path("channel_mapping.json")
 
-TEST_MODE = False
+TEST_MODE = True
 
 MIN_MATCHED_CHANNELS = 400
 MIN_PREVIOUS_COVERAGE = 0.90
