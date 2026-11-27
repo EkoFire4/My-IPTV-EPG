@@ -1,0 +1,94 @@
+name: Install V3.7 Baseline
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Successful V3.7.1 workflow run ID'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+        with:
+          ref: development-v3.3
+
+      - name: Download V3.7 diagnostics
+        uses: actions/download-artifact@v4
+        with:
+          name: EPG-V37-Diagnostics
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/v37-diagnostics
+
+      - name: Extract and verify baseline
+        run: |
+          python3 <<'PY'
+          import json
+          import hashlib
+          from pathlib import Path
+
+          files = list(Path('/tmp/v37-diagnostics').rglob('v37-diagnostics.json'))
+          assert len(files) == 1, 'Diagnostics file missing or duplicated'
+
+          data = json.loads(files[0].read_text())
+
+          assert data['version'] == '3.7.1'
+
+          matches = {
+              str(r['channel_id']): {
+                  'epg_id': r['epg_id'],
+                  'source': r['source']
+              }
+              for r in data['match_records']
+              if r['status'] == 'matched'
+          }
+
+          assert len(matches) == 675
+
+          digest = hashlib.sha256(
+              json.dumps(
+                  matches,
+                  sort_keys=True,
+                  separators=(',', ':')
+              ).encode()
+          ).hexdigest()
+
+          expected = '408fdb69b9259fbe11492826aace491b297bcaa215ce0226560145d75dcce2dd'
+
+          assert digest == expected, 'Baseline checksum mismatch'
+
+          Path('v37-baseline.json').write_text(
+              json.dumps({
+                  'version': '3.7.1',
+                  'matches': matches
+              }, indent=2) + '\n'
+          )
+
+          print('Verified channel mappings:', len(matches))
+          print('SHA-256:', digest)
+          print('Baseline verification PASSED')
+          PY
+
+      - name: Commit baseline to development
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add v37-baseline.json
+
+          if git diff --cached --quiet; then
+            echo "Baseline already installed"
+          else
+            git commit -m "Install verified 675-channel V3.7 baseline"
+            git push origin HEAD:development-v3.3
+          fi
