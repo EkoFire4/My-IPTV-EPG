@@ -53,11 +53,40 @@ def record(attrs, display):
     return {'tvg_id':cid,'original_name':name,'display_name':safe(display),'group':group,'matching_name':clean,'matching_key':key,'region':region,'region_status':status,'review_reason':'language_or_market_conflict' if status=='conflict' and np=='F1 TV' else None,'region_evidence':evidence,'regional_group':regional_group,'quality':qualities,'kind':kind}
 
 def parse(path):
-    for line in path.open(encoding='utf-8-sig',errors='replace'):
-        if not line.startswith('#EXTINF:'): continue
-        # Locate first comma outside quoted attributes.
-        m=re.match(r'^#EXTINF:((?:[^",]|"[^"]*")*),(.*)$',line.rstrip('\r\n'))
-        if m: yield record(dict(ATTR.findall(m.group(1))),m.group(2))
+    """Parse M3U metadata using tolerant EXTINF handling."""
+    content = path.read_bytes().decode(
+        'utf-8-sig', errors='replace'
+    )
+
+    for line in content.splitlines():
+        line = line.strip().lstrip('\ufeff')
+
+        if not line.upper().startswith('#EXTINF'):
+            continue
+
+        attrs = dict(ATTR.findall(line))
+
+        channel_id = attrs.get('tvg-id', '').strip()
+
+        if not channel_id or '://' in channel_id:
+            continue
+
+        display = ''
+        inside_quotes = False
+
+        for index, char in enumerate(line):
+            if char == '"':
+                inside_quotes = not inside_quotes
+
+            elif char == ',' and not inside_quotes:
+                display = line[index + 1:].strip()
+                break
+
+        if not display:
+            display = attrs.get('tvg-name', '')
+
+        yield record(attrs, display)
+
 
 
 # Candidate identities only: never assign an external EPG ID here.
