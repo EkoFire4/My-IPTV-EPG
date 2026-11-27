@@ -94,3 +94,106 @@ def suggestions(records):
     for i, e in enumerate(catalogue):
         for k in e['keys']:
             if k:
+                exact[k].add(i)
+                if len(k) >= 5:
+                    prefix[k[:4]].add(i)
+    rows = []
+    for r in records:
+        if r['status'] != 'unmatched' or r.get('event') or r.get('heading'):
+            continue
+        keys = r.get('normalised_names', [])
+        pool = set()
+        for k in keys:
+            pool.update(exact.get(k, ()))
+            if len(k) >= 5:
+                pool.update(prefix.get(k[:4], ()))
+        # For Arabic hints, compare the language-prefix-stripped name too.
+        if r.get('language_hint') == 'ar':
+            k = engine.normalise_name(r['name'], '')
+            if k:
+                keys = list(set(keys) | {k})
+                pool.update(exact.get(k, ()))
+                pool.update(prefix.get(k[:4], ()))
+        ranked = []
+        for i in pool:
+            e = catalogue[i]
+            if e['event']:
+                continue
+            score = max((SequenceMatcher(None, a, b).ratio() for a in keys for b in e['keys']), default=0)
+            if score < .88:
+                continue
+            compatible = r['region'] == e['region'] and r['region'] != 'unknown'
+            ranked.append((score, compatible, i))
+        for score, compatible, i in sorted(ranked, key=lambda x: (-x[0], -int(x[1]), x[2]))[:5]:
+            e = catalogue[i]
+            rows.append({'channel_id': r['channel_id'], 'name': r['name'], 'region': r['region'],
+                         'language_hint': r.get('language_hint', ''), 'epg_id': e['epg_id'],
+                         'source': e['source'], 'candidate_region': e['region'],
+                         'score': round(score, 3), 'same_region': compatible,
+                         'review_only': True})
+    return rows
+
+def regression(records):
+    if not BASELINE.exists():
+        return {'available': False, 'reason': 'baseline missing'}
+    old = json.loads(BASELINE.read_text(encoding='utf-8'))
+    if old.get('version') != '3.5' or len(old.get('matches', {})) != 641:
+        raise ValueError('Unexpected V3.5 baseline')
+    a = old['matches']
+    b = {str(r['channel_id']): {'epg_id': r['epg_id'], 'source': source_name(r['source'])}
+         for r in records if r['status'] == 'matched'}
+    return {'available': True, 'gained': sorted(b.keys()-a.keys()),
+            'lost': sorted(a.keys()-b.keys()),
+            'changed': [{'channel_id': k, 'old': a[k], 'new': b[k]} for k in sorted(a.keys() & b.keys()) if a[k] != b[k]],
+            'retained': len(a.keys() & b.keys())}
+
+def save_epg(root):
+    records = list(v35.records.values())
+    matched = len(root.findall('channel'))
+    if matched != sum(r['status'] == 'matched' for r in records):
+        raise RuntimeError('Diagnostic count differs from XML output')
+    # Keep diagnostic source names, not URLs.
+    for r in records:
+        if 'source' in r:
+            r['source'] = source_name(r['source'])
+    review = suggestions(records)
+    comparison = regression(records)
+    eligible = [r for r in records if r['status'] != 'excluded']
+    regular = [r for r in eligible if not r.get('event')]
+    report = {'version': '3.6', 'test_mode': True, 'matched_channels': matched,
+              'baseline_channels': 641, 'net_improvement': matched-641,
+              'programmes': len(root.findall('programme')), 'total_records': len(records),
+              'distinct_identities': len({(r['source'], r['epg_id']) for r in records if r['status']=='matched'}),
+              'eligible_channels': len(eligible), 'regular_channels': len(regular),
+              'adjusted_coverage': round(100*matched/max(1,len(eligible)),2),
+              'regular_coverage': round(100*sum(r['status']=='matched' for r in regular)/max(1,len(regular)),2),
+              'source_catalogue_entries': len(catalogue), 'extra_sources': extra_sources,
+              'suggested_channel_ids': len({r['channel_id'] for r in review}),
+              'diagnostics': dict(Counter(r.get('reason',r['status']) for r in records)),
+              'comparison': comparison, 'match_records': records}
+    (REPORT/'v36-diagnostics.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+    write_csv('v36-source-catalogue.csv', catalogue, ['epg_id','source','region','names','keys','event','programmes'])
+    write_csv('v36-review-candidates.csv', review, ['channel_id','name','region','language_hint','epg_id','source','candidate_region','score','same_region','review_only'])
+    fields = ['channel_id','name','region','event','heading','language_hint','status','method','epg_id','source','reason','normalised_names','candidates']
+    write_csv('v36-matched.csv', [r for r in records if r['status']=='matched'], fields)
+    write_csv('v36-unmatched.csv', [r for r in records if r['status']=='unmatched'], fields)
+    print('\n===== V3.6 DEVELOPMENT RESULTS =====')
+    for k,v in report.items():
+        if k not in ('match_records','comparison','extra_sources'):
+            print(f'{k}: {v}')
+    print('\n===== V3.6 REGRESSION ANALYSIS =====')
+    if comparison['available']:
+        for k in ('gained','lost','changed'):
+            print(f'{k}: {len(comparison[k])}')
+        print('retained:', comparison['retained'])
+    else:
+        print(comparison['reason'])
+    engine.TEST_MODE = True
+    v35.original_save(root)
+    print('PRODUCTION EPG NOT MODIFIED.')
+
+engine.save_epg = save_epg
+
+if __name__ == '__main__':
+    print('VERSION 3.6 — DEVELOPMENT ONLY')
+    engine.main()
