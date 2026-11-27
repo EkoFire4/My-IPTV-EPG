@@ -1,0 +1,1289 @@
+{
+  "version": "3.7",
+  "channels": {
+    "893917": {
+      "region": "de",
+      "keys": [
+        "skysportbundesliga"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.UHD.de"
+        ],
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.de"
+        ]
+      ]
+    },
+    "760846": {
+      "region": "de",
+      "keys": [
+        "skysportbundesliga"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.UHD.de"
+        ],
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.de"
+        ]
+      ]
+    },
+    "1149303": {
+      "region": "de",
+      "keys": [
+        "skysportbundesliga"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.UHD.de"
+        ],
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.de"
+        ]
+      ]
+    },
+    "1149314": {
+      "region": "de",
+      "keys": [
+        "skysportbundesliga"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.UHD.de"
+        ],
+        [
+          "epg_ripper_DE1.xml.gz",
+          "Sky.Sport.Bundesliga.de"
+        ]
+      ]
+    },
+    "1880": {
+      "region": "gr",
+      "keys": [
+        "novasportsnews"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.News.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.News.gr"
+        ]
+      ]
+    },
+    "174431": {
+      "region": "gr",
+      "keys": [
+        "novasportsnews"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.News.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.News.gr"
+        ]
+      ]
+    },
+    "1142146": {
+      "region": "gr",
+      "keys": [
+        "novasportsprime"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Prime.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Prime.gr"
+        ]
+      ]
+    },
+    "1874": {
+      "region": "gr",
+      "keys": [
+        "novasportsprime"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Prime.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Prime.gr"
+        ]
+      ]
+    },
+    "56829": {
+      "region": "gr",
+      "keys": [
+        "novasportsstart"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Start.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Start.gr"
+        ]
+      ]
+    },
+    "174254": {
+      "region": "gr",
+      "keys": [
+        "novasportsstart"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Start.HD.gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Start.gr"
+        ]
+      ]
+    },
+    "1879": {
+      "region": "gr",
+      "keys": [
+        "novasportspremierleague"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Premier.League..gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Premier.League.HD.gr"
+        ]
+      ]
+    },
+    "663683": {
+      "region": "gr",
+      "keys": [
+        "novasportspremierleague"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Premier.League..gr"
+        ],
+        [
+          "epg_ripper_GR1.xml.gz",
+          "Novasports.Premier.League.HD.gr"
+        ]
+      ]
+    },
+    "988864": {
+      "region": "tr",
+      "keys": [
+        "beinsportshaber"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_TR1.xml.gz",
+          "Bein.Sports.Haber.tr"
+        ],
+        [
+          "epg_ripper_TR1.xml.gz",
+          "beIN.SPORTS.HABER.HD.tr"
+        ]
+      ]
+    },
+    "988865": {
+      "region": "tr",
+      "keys": [
+        "beinsportshaber"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_TR1.xml.gz",
+          "Bein.Sports.Haber.tr"
+        ],
+        [
+          "epg_ripper_TR1.xml.gz",
+          "beIN.SPORTS.HABER.HD.tr"
+        ]
+      ]
+    },
+    "988866": {
+      "region": "tr",
+      "keys": [
+        "beinsportshaber"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_TR1.xml.gz",
+          "Bein.Sports.Haber.tr"
+        ],
+        [
+          "epg_ripper_TR1.xml.gz",
+          "beIN.SPORTS.HABER.HD.tr"
+        ]
+      ]
+    },
+    "1101": {
+      "region": "rs",
+      "keys": [
+        "arenasport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.1.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.1.rs"
+        ]
+      ]
+    },
+    "1100": {
+      "region": "rs",
+      "keys": [
+        "arenasport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.1.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.1.rs"
+        ]
+      ]
+    },
+    "1099": {
+      "region": "rs",
+      "keys": [
+        "arenasport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.2.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.2.rs"
+        ]
+      ]
+    },
+    "1098": {
+      "region": "rs",
+      "keys": [
+        "arenasport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.2.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.2.rs"
+        ]
+      ]
+    },
+    "1097": {
+      "region": "rs",
+      "keys": [
+        "arenasport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.3.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.3.rs"
+        ]
+      ]
+    },
+    "1096": {
+      "region": "rs",
+      "keys": [
+        "arenasport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.3.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.3.rs"
+        ]
+      ]
+    },
+    "1095": {
+      "region": "rs",
+      "keys": [
+        "arenasport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.4.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.4.rs"
+        ]
+      ]
+    },
+    "1094": {
+      "region": "rs",
+      "keys": [
+        "arenasport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.4.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.4.rs"
+        ]
+      ]
+    },
+    "1093": {
+      "region": "rs",
+      "keys": [
+        "arenasport5"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.5.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.5.rs"
+        ]
+      ]
+    },
+    "559024": {
+      "region": "rs",
+      "keys": [
+        "arenasport5"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.5.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Arena.Sport.5.rs"
+        ]
+      ]
+    },
+    "1085": {
+      "region": "rs",
+      "keys": [
+        "eurosport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Eurosport.1.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Eurosport.1.HD.rs"
+        ]
+      ]
+    },
+    "1084": {
+      "region": "rs",
+      "keys": [
+        "eurosport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Eurosport.2.HD.(RS).rs"
+        ],
+        [
+          "epg_ripper_RS1.xml.gz",
+          "Eurosport.2.HD.rs"
+        ]
+      ]
+    },
+    "1444075": {
+      "region": "ro",
+      "keys": [
+        "digisport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444072": {
+      "region": "ro",
+      "keys": [
+        "digisport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444073": {
+      "region": "ro",
+      "keys": [
+        "digisport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444074": {
+      "region": "ro",
+      "keys": [
+        "digisport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444080": {
+      "region": "ro",
+      "keys": [
+        "digisport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444077": {
+      "region": "ro",
+      "keys": [
+        "digisport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444078": {
+      "region": "ro",
+      "keys": [
+        "digisport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444079": {
+      "region": "ro",
+      "keys": [
+        "digisport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444085": {
+      "region": "ro",
+      "keys": [
+        "digisport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444082": {
+      "region": "ro",
+      "keys": [
+        "digisport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444083": {
+      "region": "ro",
+      "keys": [
+        "digisport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444084": {
+      "region": "ro",
+      "keys": [
+        "digisport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444090": {
+      "region": "ro",
+      "keys": [
+        "digisport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444087": {
+      "region": "ro",
+      "keys": [
+        "digisport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444088": {
+      "region": "ro",
+      "keys": [
+        "digisport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444089": {
+      "region": "ro",
+      "keys": [
+        "digisport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Digi.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "DIGI.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444093": {
+      "region": "ro",
+      "keys": [
+        "proarena"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "PRO.Arena.(HD).ro"
+        ]
+      ]
+    },
+    "1444094": {
+      "region": "ro",
+      "keys": [
+        "proarena"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "PRO.Arena.(HD).ro"
+        ]
+      ]
+    },
+    "1444095": {
+      "region": "ro",
+      "keys": [
+        "proarena"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Pro.Arena.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "PRO.Arena.(HD).ro"
+        ]
+      ]
+    },
+    "1444099": {
+      "region": "ro",
+      "keys": [
+        "primasport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444098": {
+      "region": "ro",
+      "keys": [
+        "primasport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444097": {
+      "region": "ro",
+      "keys": [
+        "primasport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444102": {
+      "region": "ro",
+      "keys": [
+        "primasport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444101": {
+      "region": "ro",
+      "keys": [
+        "primasport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444105": {
+      "region": "ro",
+      "keys": [
+        "primasport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444104": {
+      "region": "ro",
+      "keys": [
+        "primasport3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.3.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.3.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.3.(HD).ro"
+        ]
+      ]
+    },
+    "1444108": {
+      "region": "ro",
+      "keys": [
+        "primasport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444107": {
+      "region": "ro",
+      "keys": [
+        "primasport4"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.4.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.4.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.4.(HD).ro"
+        ]
+      ]
+    },
+    "1444111": {
+      "region": "ro",
+      "keys": [
+        "primasport5"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.5.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.5.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.5.(HD).ro"
+        ]
+      ]
+    },
+    "1444110": {
+      "region": "ro",
+      "keys": [
+        "primasport5"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.5.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Prima.Sport.5.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Prima.Sport.5.(HD).ro"
+        ]
+      ]
+    },
+    "1444113": {
+      "region": "ro",
+      "keys": [
+        "eurosport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Eurosport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444114": {
+      "region": "ro",
+      "keys": [
+        "eurosport1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.1.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.1.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Eurosport.1.(HD).ro"
+        ]
+      ]
+    },
+    "1444116": {
+      "region": "ro",
+      "keys": [
+        "eurosport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Eurosport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444117": {
+      "region": "ro",
+      "keys": [
+        "eurosport2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.2.HD.ro"
+        ],
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.2.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Eurosport.2.(HD).ro"
+        ]
+      ]
+    },
+    "1444119": {
+      "region": "ro",
+      "keys": [
+        "eurosport"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Eurosport.4K.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Eurosport.4K.ro"
+        ]
+      ]
+    },
+    "1444121": {
+      "region": "ro",
+      "keys": [
+        "sportextra"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_RO1.xml.gz",
+          "Sport.Extra.ro"
+        ],
+        [
+          "epg_ripper_RO2.xml.gz",
+          "Sport.Extra.(HD).ro"
+        ]
+      ]
+    },
+    "959446": {
+      "region": "pt",
+      "keys": [
+        "abolatv"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_PT1.xml.gz",
+          "A.Bola.TV.HD.pt"
+        ],
+        [
+          "epg_ripper_PT1.xml.gz",
+          "A.Bola.TV.pt"
+        ]
+      ]
+    },
+    "959445": {
+      "region": "pt",
+      "keys": [
+        "abolatv"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_PT1.xml.gz",
+          "A.Bola.TV.HD.pt"
+        ],
+        [
+          "epg_ripper_PT1.xml.gz",
+          "A.Bola.TV.pt"
+        ]
+      ]
+    },
+    "382843": {
+      "region": "hk",
+      "keys": [
+        "nowsports1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.1.hk"
+        ],
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.4K.1.hk"
+        ]
+      ]
+    },
+    "382842": {
+      "region": "hk",
+      "keys": [
+        "nowsports2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.2.hk"
+        ],
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.4K.2.hk"
+        ]
+      ]
+    },
+    "382841": {
+      "region": "hk",
+      "keys": [
+        "nowsports3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.3.hk"
+        ],
+        [
+          "epg_ripper_HK1.xml.gz",
+          "Now.Sports.4K.3.hk"
+        ]
+      ]
+    },
+    "1058937": {
+      "region": "id",
+      "keys": [
+        "beinsports1"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_ID1.xml.gz",
+          "Bein.1.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.1.HD.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.1.id"
+        ]
+      ]
+    },
+    "1058938": {
+      "region": "id",
+      "keys": [
+        "beinsports2"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_ID1.xml.gz",
+          "Bein.2.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.2.HD.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.2.id"
+        ]
+      ]
+    },
+    "1058939": {
+      "region": "id",
+      "keys": [
+        "beinsports3"
+      ],
+      "candidates": [
+        [
+          "epg_ripper_ID1.xml.gz",
+          "Bein.3.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.3.HD.id"
+        ],
+        [
+          "epg_ripper_ID1.xml.gz",
+          "beIN.Sports.3.id"
+        ]
+      ]
+    }
+  }
+}
