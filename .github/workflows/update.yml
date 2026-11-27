@@ -20,25 +20,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Check Python syntax and baseline
+      - name: Validate files
         run: |
-          python -m py_compile epg_engine_v32.py
-          python -m py_compile epg_engine_v33.py
-          python -m py_compile epg_engine_v34.py
-          python -m py_compile epg_engine_v35.py
-          python -m py_compile update_epg.py
-          test -f v35-baseline.json
+          python -m py_compile epg_engine_v32.py epg_engine_v33.py epg_engine_v34.py epg_engine_v35.py epg_engine_v36.py update_epg.py
+          test -f v36-baseline.json
+          test -f v37-reviewed-candidates.json
 
-      - name: Run V3.6 development engine
+      - name: Run V3.7
         env:
           M3U_URL: ${{ secrets.M3U_URL }}
         run: python update_epg.py
 
-      - name: Upload V3.6 diagnostics
+      - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: EPG-V36-Diagnostics
-          path: reports/v36-*
+          name: EPG-V37-Diagnostics
+          path: reports/v37-*
           retention-days: 3
           if-no-files-found: warn
