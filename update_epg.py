@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V3.7 development wrapper for the existing V3.2–V3.6 engines."""
+"""V3.7.1 development wrapper for the existing V3.2–V3.6 engines."""
 import json
 import re
 from pathlib import Path
@@ -7,7 +7,7 @@ from collections import defaultdict, Counter
 import epg_engine_v36 as v36
 
 engine = v36.engine
-engine.VERSION = '3.7'
+engine.VERSION = '3.7.1'
 engine.TEST_MODE = True
 engine.MIN_MATCHED_CHANNELS = 645
 engine.OUTPUT_FILE = Path('epgs/development-v37.xml.gz')
@@ -18,6 +18,8 @@ old_load = engine.load_epg_sources
 old_match = engine.match_channel
 live = defaultdict(list)
 resolutions = []
+baseline_restorations = []
+identity_index = defaultdict(list)
 rejections = Counter()
 
 def quality(value):
@@ -36,7 +38,9 @@ def source_key(e):
 def load_sources(*args, **kwargs):
     entries = old_load(*args, **kwargs)
     live.clear()
+    identity_index.clear()
     for e in entries:
+        identity_index[source_key(e)].append(e)
         for key in e.get('keys', []):
             live[e.get('region',''), key].append(e)
     return entries
@@ -56,6 +60,28 @@ def agree(a,b):
 def match_channel(channel, indexes, mappings):
     result, method, candidates = old_match(channel,indexes,mappings)
     cid = str(channel['id'])
+    # Preserve a prior source only when the current engine already accepts
+    # a compatible match and the old source has corroborating live schedules.
+    prior = baseline['matches'].get(cid)
+    if result and prior and source_key(result) != (prior['source'], prior['epg_id']):
+        region = channel.get('region', '')
+        keys = set(channel.get('keys', []))
+        originals = identity_index.get((prior['source'], prior['epg_id']), [])
+        if (len(originals) == 1 and region and not channel.get('ambiguous_region')
+                and not channel.get('event') and not channel.get('heading')):
+            original = originals[0]
+            if (original.get('region') == result.get('region') == region
+                    and not original.get('event') and not result.get('event')
+                    and keys.intersection(original.get('keys', []))
+                    and keys.intersection(result.get('keys', []))
+                    and agree(original, result)):
+                record = v36.v35.records[cid]
+                baseline_restorations.append(dict(channel_id=cid, name=record['name'],
+                    previous_candidate=dict(epg_id=v36.safe(result['id']), source=v36.source_name(result['source'])),
+                    restored=prior))
+                record.update(epg_id=prior['epg_id'], source=prior['source'])
+                return original, method, []
+        rejections['baseline_change_not_verified'] += 1
     if result or method != 'schedule_ambiguity' or channel.get('event') or channel.get('heading') or channel.get('ambiguous_region'):
         return result,method,candidates
     row = reviewed.get(cid)
@@ -104,16 +130,24 @@ def save_epg(root):
         raise RuntimeError('XML and diagnostic counts disagree')
     REPORT.mkdir(exist_ok=True)
     review = v36.suggestions(records)
-    report = dict(version='3.7',test_mode=True,matched_channels=len(matched),baseline_channels=len(old),programmes=len(root.findall('programme')),total_records=len(records),distinct_identities=len({(x['source'],x['epg_id']) for x in matched.values()}),gained=gained,lost=lost,changed=changed,retained=len(old.keys() & matched.keys()),resolutions=resolutions,rejections=dict(rejections),match_records=records)
+    report = dict(version='3.7.1',test_mode=True,matched_channels=len(matched),baseline_channels=len(old),programmes=len(root.findall('programme')),total_records=len(records),distinct_identities=len({(x['source'],x['epg_id']) for x in matched.values()}),gained=gained,lost=lost,changed=changed,retained=len(old.keys() & matched.keys()),resolutions=resolutions,baseline_restorations=baseline_restorations,changed_details=[dict(channel_id=k,old=old[k],new=matched[k]) for k in changed],rejections=dict(rejections),match_records=records)
     (REPORT/'v37-diagnostics.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     v36.write_csv('v37-resolved.csv',resolutions,['channel_id','name','epg_id','source','quality','method'])
     v36.write_csv('v37-review-candidates.csv',review,['channel_id','name','region','language_hint','epg_id','source','candidate_region','score','same_region','review_only'])
     v36.write_csv('v37-source-catalogue.csv',v36.catalogue,['epg_id','source','region','names','keys','event','programmes'])
-    print('\n===== V3.7 DEVELOPMENT RESULTS =====')
+    print('\n===== V3.7.1 DEVELOPMENT RESULTS =====')
     print('Matched:',len(matched),'Programmes:',report['programmes'],'Resolved:',len(resolutions))
     print('Rejections:',dict(rejections))
-    print('\n===== V3.7 REGRESSION ANALYSIS =====')
+    print('\n===== V3.7.1 REGRESSION ANALYSIS =====')
     print('Gained:',len(gained),'Lost:',len(lost),'Changed:',len(changed),'Retained:',report['retained'])
+    print('Baseline restorations:', len(baseline_restorations))
+    for item in baseline_restorations:
+        print('Restored:', json.dumps(item, ensure_ascii=False))
+    names = {str(r['channel_id']): r['name'] for r in records}
+    for k in changed:
+        print('Changed:', k, names.get(k, ''), old[k], '->', matched[k])
+    for k in lost:
+        print('Lost:', k, names.get(k, ''), old[k])
     engine.TEST_MODE = True
     if lost or changed:
         raise RuntimeError('Regression gate failed; review diagnostics. Production not modified.')
@@ -127,5 +161,5 @@ if __name__ == '__main__':
     reviewed = json.loads(REVIEW.read_text(encoding='utf-8'))['channels']
     if baseline.get('version')!='3.6' or len(baseline['matches'])!=645:
         raise ValueError('Invalid V3.6 baseline')
-    print('V3.7 DEVELOPMENT ONLY; reviewed IDs:',len(reviewed))
+    print('V3.7.1 DEVELOPMENT ONLY; reviewed IDs:',len(reviewed))
     engine.main()
