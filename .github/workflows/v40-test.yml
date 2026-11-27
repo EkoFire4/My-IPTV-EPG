@@ -1,0 +1,29 @@
+name: EPG V4.0 Development Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    if: github.ref == 'refs/heads/development-v3.3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate and run
+        env:
+          M3U_URL: ${{ secrets.M3U_URL }}
+        run: |
+          python -m py_compile epg_engine_v40.py playlist_metadata.py
+          python epg_engine_v40.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: EPG-V40-Diagnostics
+          path: |
+            reports/v40-*
+            epgs/development-v40.xml.gz
+          if-no-files-found: warn
