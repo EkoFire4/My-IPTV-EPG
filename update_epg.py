@@ -191,4 +191,4 @@ def suggestions(records):
       "epg_id": "TNT.Sports.1.HD.uk",
       "source": "epg_ripper_UK1.xml.gz"
     },
-    "1174227": {
+    "1174227": { 
