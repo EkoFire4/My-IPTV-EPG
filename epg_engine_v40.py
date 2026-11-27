@@ -19,25 +19,115 @@ metadata, index, review = {}, defaultdict(list), []
 counts = Counter()
 
 def read_playlist():
-    # Download once, then supply identical bytes to both parsers.
     original = e.download
     raw = original(e.M3U_URL)
-    e.download = lambda url: raw if url == e.M3U_URL else original(url)
+
+    if isinstance(raw, str):
+        raw = raw.encode('utf-8')
+
+    if raw[:2] == b'\x1f\x8b':
+        raw = gzip.decompress(raw)
+
+    e.download = lambda url: (
+        raw if url == e.M3U_URL else original(url)
+    )
+
     try:
         channels = old_read()
     finally:
         e.download = original
+
+    content = raw.decode('utf-8-sig', errors='replace')
+
+    counts['playlist_bytes'] = len(raw)
+    counts['playlist_extinf'] = sum(
+        line.strip().upper().startswith('#EXTINF')
+        for line in content.splitlines()
+    )
+    counts['engine_channels'] = len(channels)
+
     with tempfile.TemporaryDirectory() as tmp:
-        path = Path(tmp)/'playlist.m3u'
+        path = Path(tmp) / 'playlist.m3u'
         path.write_bytes(raw)
         rows = list(meta.parse(path))
-    ids = Counter(r['tvg_id'] for r in rows)
+
+    counts['metadata_parsed'] = len(rows)
+
+    ids = Counter(
+        r['tvg_id'] for r in rows if r['tvg_id']
+    )
+
+    counts['metadata_duplicate_ids'] = sum(
+        n > 1 for n in ids.values()
+    )
+
+    engine_ids = {str(cid) for cid in channels}
+
+    metadata.clear()
+
     for r in rows:
+        cid = r['tvg_id']
+
+        if not cid or ids[cid] != 1:
+            continue
+
+        if cid not in engine_ids:
+            continue
+
         meta.classify_event(r)
-        r['identity_name'], r['identity_key'], r['alias_candidates'] = meta.identity(r)
-        if ids[r['tvg_id']] == 1:
-            metadata[r['tvg_id']] = r
+
+        (
+            r['identity_name'],
+            r['identity_key'],
+            r['alias_candidates']
+        ) = meta.identity(r)
+
+        metadata[cid] = r
+
     counts['metadata_unique'] = len(metadata)
+
+    counts['metadata_identity_eligible'] = sum(
+        bool(r['identity_key'])
+        for r in metadata.values()
+    )
+
+    counts['metadata_unreconciled'] = len(
+        set(ids) - engine_ids
+    )
+
+    coverage = (
+        100 * len(metadata) / len(engine_ids)
+        if engine_ids else 0
+    )
+
+    counts['metadata_coverage_percent'] = round(
+        coverage, 2
+    )
+
+    print('\n===== V4.1 METADATA DIAGNOSTICS =====')
+    print(json.dumps(dict(counts), indent=2))
+
+    report_dir = Path('reports')
+    report_dir.mkdir(exist_ok=True)
+
+    (report_dir / 'v40-ingestion.json').write_text(
+        json.dumps(dict(counts), indent=2),
+        encoding='utf-8'
+    )
+
+    if coverage < 95:
+        raise RuntimeError(
+            'Metadata ingestion gate failed: '
+            'less than 95% channel reconciliation.'
+        )
+
+    if not counts['metadata_identity_eligible']:
+        raise RuntimeError(
+            'No eligible metadata identities recovered.'
+        )
+
+    print('METADATA INGESTION GATE PASSED')
+
     return channels
 
 def load_sources(*args, **kwargs):
@@ -91,7 +181,7 @@ def save(root):
     lost = sorted(baseline.keys()-matched.keys()); gained = sorted(matched.keys()-baseline.keys())
     changed = [k for k in sorted(baseline.keys() & matched.keys()) if baseline[k]!=matched[k]]
     ok = not lost and not changed and len(ids)==len(set(ids))==len(matched) and set(ids)==programme_ids and bool(ids)
-    report = dict(version='4.0',test_mode=True,matched_channels=len(matched),programmes=len(root.findall('programme')),gained=gained,lost=lost,changed=changed,gate_passed=ok,counts=dict(counts),matches=matched,review=review)
+    report = dict(version='4.1',test_mode=True,matched_channels=len(matched),programmes=len(root.findall('programme')),gained=gained,lost=lost,changed=changed,gate_passed=ok,counts=dict(counts),matches=matched,review=review)
     (out/'v40-diagnostics.json').write_text(json.dumps(report,indent=2))
     print('V4.0:',len(matched),'gained:',len(gained),'lost:',len(lost),'changed:',len(changed),'gate:',ok)
     if not ok: raise RuntimeError('Regression gate failed; production untouched')
@@ -102,6 +192,6 @@ def save(root):
     tmp = path.with_suffix('.tmp'); tmp.write_bytes(gzip.compress(data,mtime=0)); tmp.replace(path)
 
 if __name__ == '__main__':
-    e.VERSION='4.0'; e.TEST_MODE=True
+    e.VERSION='4.1'; e.TEST_MODE=True
     e.read_playlist=read_playlist; e.load_epg_sources=load_sources; e.match_channel=match; e.save_epg=save
     e.main()
