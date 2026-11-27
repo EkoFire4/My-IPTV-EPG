@@ -62,16 +62,14 @@ def read_playlist():
     )
 
     engine_ids = {str(cid) for cid in channels}
-
     metadata.clear()
+
+    grouped = defaultdict(list)
 
     for r in rows:
         cid = r['tvg_id']
 
-        if not cid or ids[cid] != 1:
-            continue
-
-        if cid not in engine_ids:
+        if not cid or cid not in engine_ids:
             continue
 
         meta.classify_event(r)
@@ -82,7 +80,61 @@ def read_playlist():
             r['alias_candidates']
         ) = meta.identity(r)
 
-        metadata[cid] = r
+        grouped[cid].append(r)
+
+    counts['metadata_grouped_ids'] = len(grouped)
+    counts['metadata_duplicate_groups_resolved'] = 0
+    counts['metadata_identity_conflicts'] = 0
+    counts['metadata_region_conflicts'] = 0
+    counts['metadata_quality_conflicts'] = 0
+    counts['metadata_classification_conflicts'] = 0
+
+    for cid, group in grouped.items():
+
+        regions = {
+            (r['region'], r['region_status'])
+            for r in group
+        }
+
+        identities = {
+            (r['identity_key'], r['identity_name'])
+            for r in group
+        }
+
+        qualities = {
+            tuple(sorted(set(r['quality'])))
+            for r in group
+        }
+
+        classifications = {
+            (r['kind'], r['event_class'])
+            for r in group
+        }
+
+        if len(regions) != 1:
+            counts['metadata_region_conflicts'] += 1
+            continue
+
+        if len(identities) != 1:
+            counts['metadata_identity_conflicts'] += 1
+            continue
+
+        if len(qualities) != 1:
+            counts['metadata_quality_conflicts'] += 1
+            continue
+
+        if len(classifications) != 1:
+            counts['metadata_classification_conflicts'] += 1
+            continue
+
+        selected = group[0].copy()
+        selected['duplicate_count'] = len(group)
+
+        metadata[cid] = selected
+
+        if len(group) > 1:
+            counts['metadata_duplicate_groups_resolved'] += 1
+   
 
     counts['metadata_unique'] = len(metadata)
 
@@ -181,7 +233,7 @@ def save(root):
     lost = sorted(baseline.keys()-matched.keys()); gained = sorted(matched.keys()-baseline.keys())
     changed = [k for k in sorted(baseline.keys() & matched.keys()) if baseline[k]!=matched[k]]
     ok = not lost and not changed and len(ids)==len(set(ids))==len(matched) and set(ids)==programme_ids and bool(ids)
-    report = dict(version='4.1',test_mode=True,matched_channels=len(matched),programmes=len(root.findall('programme')),gained=gained,lost=lost,changed=changed,gate_passed=ok,counts=dict(counts),matches=matched,review=review)
+    report = dict(version='4.2',test_mode=True,matched_channels=len(matched),programmes=len(root.findall('programme')),gained=gained,lost=lost,changed=changed,gate_passed=ok,counts=dict(counts),matches=matched,review=review)
     (out/'v40-diagnostics.json').write_text(json.dumps(report,indent=2))
     print('V4.0:',len(matched),'gained:',len(gained),'lost:',len(lost),'changed:',len(changed),'gate:',ok)
     if not ok: raise RuntimeError('Regression gate failed; production untouched')
@@ -192,6 +244,6 @@ def save(root):
     tmp = path.with_suffix('.tmp'); tmp.write_bytes(gzip.compress(data,mtime=0)); tmp.replace(path)
 
 if __name__ == '__main__':
-    e.VERSION='4.1'; e.TEST_MODE=True
+    e.VERSION='4.2'; e.TEST_MODE=True
     e.read_playlist=read_playlist; e.load_epg_sources=load_sources; e.match_channel=match; e.save_epg=save
     e.main()
