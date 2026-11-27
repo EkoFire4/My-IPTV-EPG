@@ -1,0 +1,2705 @@
+{
+  "version": "3.7.1",
+  "matches": {
+    "894977": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "894978": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "894979": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "894980": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "894981": {
+      "epg_id": "TNT.Sports.5.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174213": {
+      "epg_id": "TNT.Sports.Ultimate.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174218": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174219": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174220": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174221": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174214": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174215": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174216": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174217": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311894": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311895": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311896": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311897": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174231": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174232": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174233": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174234": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174226": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174227": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174228": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174229": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311899": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311900": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311901": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311902": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174236": {
+      "epg_id": "TNT.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174237": {
+      "epg_id": "TNT.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174238": {
+      "epg_id": "TNT.Sports.3.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1174239": {
+      "epg_id": "TNT.Sports.4.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1311997": {
+      "epg_id": "Sky.Sports.Football.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312031": {
+      "epg_id": "Sky.Sports.Football.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312814": {
+      "epg_id": "MUTV.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312047": {
+      "epg_id": "Sky.Sports.Football.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312815": {
+      "epg_id": "MUTV.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "394555": {
+      "epg_id": "Sky.Sports.Football.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312824": {
+      "epg_id": "MUTV.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312178": {
+      "epg_id": "Sky.Sports.Football.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312835": {
+      "epg_id": "MUTV.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312727": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312728": {
+      "epg_id": "Premier.Sports.2.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312717": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312718": {
+      "epg_id": "Premier.Sports.2.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312719": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312725": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312726": {
+      "epg_id": "Premier.Sports.2.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312723": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312724": {
+      "epg_id": "Premier.Sports.2.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "1312729": {
+      "epg_id": "Premier.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1312730": {
+      "epg_id": "Premier.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1172358": {
+      "epg_id": "TNT.Sports.Box.Office.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1172361": {
+      "epg_id": "TNT.Sports.Box.Office.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1172360": {
+      "epg_id": "TNT.Sports.Box.Office.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "1172359": {
+      "epg_id": "TNT.Sports.Box.Office.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "827990": {
+      "epg_id": "Premier.Sports.1.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "827989": {
+      "epg_id": "Premier.Sports.2.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "827988": {
+      "epg_id": "MUTV.HD.uk",
+      "source": "epg_ripper_UK1.xml.gz"
+    },
+    "92512": {
+      "epg_id": "ESPN.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237593": {
+      "epg_id": "ESPN.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237594": {
+      "epg_id": "ESPN.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237595": {
+      "epg_id": "ESPN.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237596": {
+      "epg_id": "ESPN.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1122": {
+      "epg_id": "sportdigital.Fussball.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "15423": {
+      "epg_id": "sportdigital.Fussball.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760963": {
+      "epg_id": "sportdigital.Fussball.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149501": {
+      "epg_id": "sportdigital.Fussball.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36062": {
+      "epg_id": "Sky.Sport.Austria.1.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36063": {
+      "epg_id": "Sky.Sport.Austria.2.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36064": {
+      "epg_id": "Sky.Sport.Austria.3.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36065": {
+      "epg_id": "Sky.Sport.Austria.4.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36066": {
+      "epg_id": "Sky.Sport.Austria.5.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36067": {
+      "epg_id": "Sky.Sport.Austria.6.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "36068": {
+      "epg_id": "Sky.Sport.Austria.7.HD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "858554": {
+      "epg_id": "ESPN.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858552": {
+      "epg_id": "ESPN2.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858550": {
+      "epg_id": "ESPNU.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858551": {
+      "epg_id": "ESPNEWS.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858547": {
+      "epg_id": "FS1.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858555": {
+      "epg_id": "FS2.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858546": {
+      "epg_id": "Fox.Soccer.Plus.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858539": {
+      "epg_id": "CBS.Sports.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858537": {
+      "epg_id": "Monumental.Sports.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858533": {
+      "epg_id": "NBA.TV.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858531": {
+      "epg_id": "MLB.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858526": {
+      "epg_id": "Fight.Network.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858524": {
+      "epg_id": "GOL.TV.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858523": {
+      "epg_id": "Tennis.Channel.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858521": {
+      "epg_id": "Golf.Channel.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858520": {
+      "epg_id": "Billiard.TV.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858514": {
+      "epg_id": "Altitude.Sports.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858646": {
+      "epg_id": "MSG2.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858645": {
+      "epg_id": "MSG.Plus.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858641": {
+      "epg_id": "Big.Ten.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858585": {
+      "epg_id": "NBC.Sports.Bay.Area.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858584": {
+      "epg_id": "NBC.Sports.Bay.Area.Plus.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858583": {
+      "epg_id": "NBC.Sports.Boston.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858582": {
+      "epg_id": "NBC.Sports.California.SAT.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858581": {
+      "epg_id": "NBC.Sports.California.Plus.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858575": {
+      "epg_id": "NBC.Sports.Philadelphia.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858574": {
+      "epg_id": "NBC.Sports.Philadelphia.Plus.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858697": {
+      "epg_id": "Spectrum.SportsNet.LA.Dodgers.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858696": {
+      "epg_id": "Spectrum.SportsNet.Lakers.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858670": {
+      "epg_id": "Space.City.Home.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858661": {
+      "epg_id": "Marquee.Sports.Network.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858658": {
+      "epg_id": "SportsGrid.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858653": {
+      "epg_id": "World.Fishing.Network.HD.(US).us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "858652": {
+      "epg_id": "Yes.Network.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "988078": {
+      "epg_id": "Tennis.Channel.HD.us2",
+      "source": "epg_ripper_US2.xml.gz"
+    },
+    "944771": {
+      "epg_id": "FoxSportsNews.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944691": {
+      "epg_id": "FoxSports503.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944684": {
+      "epg_id": "FoxSports505.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944693": {
+      "epg_id": "FoxSports506.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944685": {
+      "epg_id": "beINSports1.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944686": {
+      "epg_id": "beINSports2.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "944687": {
+      "epg_id": "beINSports3.au",
+      "source": "epg_ripper_AU1.xml.gz"
+    },
+    "1091861": {
+      "epg_id": "FOX.SPORTS.PREMIUM.mx",
+      "source": "epg_ripper_MX1.xml.gz"
+    },
+    "809380": {
+      "epg_id": "Sky.Sport.Select.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809379": {
+      "epg_id": "Sky.Sport.1.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809378": {
+      "epg_id": "Sky.Sport.2.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809377": {
+      "epg_id": "Sky.Sport.3.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809376": {
+      "epg_id": "Sky.Sport.4.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809375": {
+      "epg_id": "Sky.Sport.5.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809374": {
+      "epg_id": "Sky.Sport.6.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809373": {
+      "epg_id": "Sky.Sport.7.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809372": {
+      "epg_id": "Sky.Sport.Premier.League.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "809371": {
+      "epg_id": "Sky.Sport.9.nz",
+      "source": "epg_ripper_NZ1.xml.gz"
+    },
+    "894968": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894969": {
+      "epg_id": "Ziggo.Sport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894970": {
+      "epg_id": "Ziggo.Sport.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894971": {
+      "epg_id": "Ziggo.Sport.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894972": {
+      "epg_id": "Ziggo.Sport.5.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894973": {
+      "epg_id": "Ziggo.Sport.6.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "894987": {
+      "epg_id": "CANAL+SPORT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "894998": {
+      "epg_id": "Sky.Sport.Uno.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1281": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1280": {
+      "epg_id": "Ziggo.Sport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1278": {
+      "epg_id": "Ziggo.Sport.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1279": {
+      "epg_id": "Ziggo.Sport.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1277": {
+      "epg_id": "Ziggo.Sport.5.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1276": {
+      "epg_id": "Ziggo.Sport.6.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1275": {
+      "epg_id": "Eurosport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "1274": {
+      "epg_id": "Eurosport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548065": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548066": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548062": {
+      "epg_id": "Ziggo.Sport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548068": {
+      "epg_id": "Ziggo.Sport.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548067": {
+      "epg_id": "Ziggo.Sport.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548069": {
+      "epg_id": "Ziggo.Sport.5.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548063": {
+      "epg_id": "Ziggo.Sport.6.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548060": {
+      "epg_id": "Eurosport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "548058": {
+      "epg_id": "Eurosport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "932999": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "932997": {
+      "epg_id": "Ziggo.Sport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "933001": {
+      "epg_id": "Ziggo.Sport.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "933000": {
+      "epg_id": "Ziggo.Sport.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "933002": {
+      "epg_id": "Ziggo.Sport.5.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "932998": {
+      "epg_id": "Ziggo.Sport.6.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "933004": {
+      "epg_id": "Eurosport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "933003": {
+      "epg_id": "Eurosport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237598": {
+      "epg_id": "Ziggo.Sport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237599": {
+      "epg_id": "Ziggo.Sport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237601": {
+      "epg_id": "Ziggo.Sport.3.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237600": {
+      "epg_id": "Ziggo.Sport.4.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237602": {
+      "epg_id": "Ziggo.Sport.5.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237603": {
+      "epg_id": "Ziggo.Sport.6.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237604": {
+      "epg_id": "Eurosport.1.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "237605": {
+      "epg_id": "Eurosport.2.nl",
+      "source": "epg_ripper_NL1.xml.gz"
+    },
+    "562015": {
+      "epg_id": "Sport10.HD.be",
+      "source": "epg_ripper_BE2.xml.gz"
+    },
+    "368584": {
+      "epg_id": "Sport10.HD.be",
+      "source": "epg_ripper_BE2.xml.gz"
+    },
+    "1807157": {
+      "epg_id": "Eurosport.1.be",
+      "source": "epg_ripper_BE2.xml.gz"
+    },
+    "1807158": {
+      "epg_id": "EUROSPORT.2.be",
+      "source": "epg_ripper_BE2.xml.gz"
+    },
+    "761967": {
+      "epg_id": "Sport10.HD.be",
+      "source": "epg_ripper_BE2.xml.gz"
+    },
+    "893917": {
+      "epg_id": "Sky.Sport.Bundesliga.UHD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "893918": {
+      "epg_id": "Sky.Sport.UHD.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1127": {
+      "epg_id": "Eurosport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1126": {
+      "epg_id": "Eurosport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1124": {
+      "epg_id": "SPORT1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1123": {
+      "epg_id": "SPORT1+.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1118": {
+      "epg_id": "eSports1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "15419": {
+      "epg_id": "Eurosport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "15420": {
+      "epg_id": "Eurosport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "15421": {
+      "epg_id": "SPORT1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1025146": {
+      "epg_id": "DF1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149423": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149422": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149420": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760942": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760845": {
+      "epg_id": "Sky.Sport.Bundesliga.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760843": {
+      "epg_id": "Sky.Sport.Bundesliga.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760842": {
+      "epg_id": "Sky.Sport.Bundesliga.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760841": {
+      "epg_id": "Sky.Sport.Bundesliga.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760840": {
+      "epg_id": "Sky.Sport.Bundesliga.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760839": {
+      "epg_id": "Sky.Sport.Bundesliga.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760838": {
+      "epg_id": "Sky.Sport.Bundesliga.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760837": {
+      "epg_id": "Sky.Sport.Bundesliga.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760836": {
+      "epg_id": "Sky.Sport.Bundesliga.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149304": {
+      "epg_id": "Sky.Sport.Bundesliga.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149306": {
+      "epg_id": "Sky.Sport.Bundesliga.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149307": {
+      "epg_id": "Sky.Sport.Bundesliga.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149308": {
+      "epg_id": "Sky.Sport.Bundesliga.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149309": {
+      "epg_id": "Sky.Sport.Bundesliga.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149310": {
+      "epg_id": "Sky.Sport.Bundesliga.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149311": {
+      "epg_id": "Sky.Sport.Bundesliga.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149312": {
+      "epg_id": "Sky.Sport.Bundesliga.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149313": {
+      "epg_id": "Sky.Sport.Bundesliga.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149315": {
+      "epg_id": "Sky.Sport.Bundesliga.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149317": {
+      "epg_id": "Sky.Sport.Bundesliga.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149318": {
+      "epg_id": "Sky.Sport.Bundesliga.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149319": {
+      "epg_id": "Sky.Sport.Bundesliga.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149320": {
+      "epg_id": "Sky.Sport.Bundesliga.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149321": {
+      "epg_id": "Sky.Sport.Bundesliga.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149322": {
+      "epg_id": "Sky.Sport.Bundesliga.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149323": {
+      "epg_id": "Sky.Sport.Bundesliga.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149324": {
+      "epg_id": "Sky.Sport.Bundesliga.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760960": {
+      "epg_id": "Sky.Sport.News.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760954": {
+      "epg_id": "Sky.Sport.Top.Event.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760956": {
+      "epg_id": "Sky.Sport.Premier.League.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760959": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760957": {
+      "epg_id": "Sky.Sport.Mix.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760955": {
+      "epg_id": "Sky.Sport.Tennis.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760958": {
+      "epg_id": "Sky.Sport.Golf.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760952": {
+      "epg_id": "Sky.Sport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760950": {
+      "epg_id": "Sky.Sport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760949": {
+      "epg_id": "Sky.Sport.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760948": {
+      "epg_id": "Sky.Sport.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760947": {
+      "epg_id": "Sky.Sport.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760946": {
+      "epg_id": "Sky.Sport.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760945": {
+      "epg_id": "Sky.Sport.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760944": {
+      "epg_id": "Sky.Sport.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760943": {
+      "epg_id": "Sky.Sport.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760951": {
+      "epg_id": "Sky.Sport.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149431": {
+      "epg_id": "Sky.Sport.News.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149434": {
+      "epg_id": "Sky.Sport.Top.Event.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149432": {
+      "epg_id": "Sky.Sport.Premier.League.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149473": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149430": {
+      "epg_id": "Sky.Sport.Mix.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149433": {
+      "epg_id": "Sky.Sport.Tennis.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149429": {
+      "epg_id": "Sky.Sport.Golf.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149435": {
+      "epg_id": "Sky.Sport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149436": {
+      "epg_id": "Sky.Sport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149437": {
+      "epg_id": "Sky.Sport.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149438": {
+      "epg_id": "Sky.Sport.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149439": {
+      "epg_id": "Sky.Sport.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149440": {
+      "epg_id": "Sky.Sport.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149441": {
+      "epg_id": "Sky.Sport.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149442": {
+      "epg_id": "Sky.Sport.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149443": {
+      "epg_id": "Sky.Sport.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149444": {
+      "epg_id": "Sky.Sport.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149457": {
+      "epg_id": "Sky.Sport.News.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149460": {
+      "epg_id": "Sky.Sport.Top.Event.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149458": {
+      "epg_id": "Sky.Sport.Premier.League.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149474": {
+      "epg_id": "Sky.Sport.F1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149456": {
+      "epg_id": "Sky.Sport.Mix.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149459": {
+      "epg_id": "Sky.Sport.Tennis.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149454": {
+      "epg_id": "Sky.Sport.Golf.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149461": {
+      "epg_id": "Sky.Sport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149462": {
+      "epg_id": "Sky.Sport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149463": {
+      "epg_id": "Sky.Sport.3.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149464": {
+      "epg_id": "Sky.Sport.4.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149465": {
+      "epg_id": "Sky.Sport.5.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149466": {
+      "epg_id": "Sky.Sport.6.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149467": {
+      "epg_id": "Sky.Sport.7.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149468": {
+      "epg_id": "Sky.Sport.8.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149469": {
+      "epg_id": "Sky.Sport.9.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149470": {
+      "epg_id": "Sky.Sport.10.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760961": {
+      "epg_id": "Eurosport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149499": {
+      "epg_id": "Eurosport.1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760962": {
+      "epg_id": "Eurosport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149500": {
+      "epg_id": "Eurosport.2.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "761090": {
+      "epg_id": "MS.Sport.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149503": {
+      "epg_id": "MS.Sport.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760964": {
+      "epg_id": "SPORT1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1149504": {
+      "epg_id": "SPORT1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760966": {
+      "epg_id": "Motorvision.TV.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "760969": {
+      "epg_id": "eSports1.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "833946": {
+      "epg_id": "Premier.Sports.1.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "833945": {
+      "epg_id": "Premier.Sports.2.HD.ie",
+      "source": "epg_ripper_IE1.xml.gz"
+    },
+    "936753": {
+      "epg_id": "TF1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "936754": {
+      "epg_id": "TF1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "936755": {
+      "epg_id": "TF1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941598": {
+      "epg_id": "Eurosport.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941596": {
+      "epg_id": "Eurosport.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941600": {
+      "epg_id": "Eurosport.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941599": {
+      "epg_id": "Eurosport.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941597": {
+      "epg_id": "Eurosport.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941601": {
+      "epg_id": "Eurosport.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941602": {
+      "epg_id": "Equidia.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941603": {
+      "epg_id": "Equidia.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941604": {
+      "epg_id": "Equidia.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941618": {
+      "epg_id": "Automoto.la.chaine.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941619": {
+      "epg_id": "Automoto.la.chaine.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941405": {
+      "epg_id": "CANAL+FOOT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941406": {
+      "epg_id": "CANAL+FOOT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941407": {
+      "epg_id": "CANAL+FOOT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941408": {
+      "epg_id": "CANAL+SPORT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941409": {
+      "epg_id": "CANAL+SPORT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941410": {
+      "epg_id": "CANAL+SPORT.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941434": {
+      "epg_id": "RMC.Sport.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941435": {
+      "epg_id": "RMC.Sport.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941438": {
+      "epg_id": "RMC.Sport.Live.3.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941439": {
+      "epg_id": "RMC.Sport.Live.3.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941440": {
+      "epg_id": "RMC.Sport.Live.4.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941441": {
+      "epg_id": "RMC.Sport.Live.4.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941417": {
+      "epg_id": "beIN.SPORTS.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941418": {
+      "epg_id": "beIN.SPORTS.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941419": {
+      "epg_id": "beIN.SPORTS.1.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941420": {
+      "epg_id": "beIN.SPORTS.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941421": {
+      "epg_id": "beIN.SPORTS.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941422": {
+      "epg_id": "beIN.SPORTS.2.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941423": {
+      "epg_id": "beIN.SPORTS.3.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941424": {
+      "epg_id": "beIN.SPORTS.3.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941425": {
+      "epg_id": "beIN.SPORTS.3.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941426": {
+      "epg_id": "beIN.SPORTS.MAX.4.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941427": {
+      "epg_id": "beIN.SPORTS.MAX.5.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941428": {
+      "epg_id": "beIN.SPORTS.MAX.6.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941429": {
+      "epg_id": "beIN.SPORTS.MAX.7.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941430": {
+      "epg_id": "beIN.SPORTS.MAX.8.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941431": {
+      "epg_id": "beIN.SPORTS.MAX.9.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "941432": {
+      "epg_id": "beIN.SPORTS.MAX.10.fr",
+      "source": "epg_ripper_FR1.xml.gz"
+    },
+    "2386": {
+      "epg_id": "ORF.SPORT.+.de",
+      "source": "epg_ripper_DE1.xml.gz"
+    },
+    "1880": {
+      "epg_id": "Novasports.News.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174431": {
+      "epg_id": "Novasports.News.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1142146": {
+      "epg_id": "Novasports.Prime.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1874": {
+      "epg_id": "Novasports.Prime.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "56829": {
+      "epg_id": "Novasports.Start.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174254": {
+      "epg_id": "Novasports.Start.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1879": {
+      "epg_id": "Novasports.Premier.League.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "663683": {
+      "epg_id": "Novasports.Premier.League.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "173185": {
+      "epg_id": "Novasports1.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "193070": {
+      "epg_id": "Novasports1.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "173186": {
+      "epg_id": "Novasports2.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1878": {
+      "epg_id": "Novasports2.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174271": {
+      "epg_id": "Novasports3.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1877": {
+      "epg_id": "Novasports3.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174272": {
+      "epg_id": "Novasports4.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1876": {
+      "epg_id": "Novasports4.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1875": {
+      "epg_id": "Novasports5.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "193074": {
+      "epg_id": "Novasports5.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174273": {
+      "epg_id": "Novasports6.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "699928": {
+      "epg_id": "Novasports6.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1648352": {
+      "epg_id": "Magenta.Sport.4K.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174426": {
+      "epg_id": "Magenta.Sport.1.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1890": {
+      "epg_id": "Magenta.Sport.1.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174427": {
+      "epg_id": "Magenta.Sport.2.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1889": {
+      "epg_id": "Magenta.Sport.2.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174428": {
+      "epg_id": "Magenta.Sport.3.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1888": {
+      "epg_id": "Magenta.Sport.3.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174429": {
+      "epg_id": "Magenta.Sport.4.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1887": {
+      "epg_id": "Magenta.Sport.4.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174430": {
+      "epg_id": "Magenta.Sport.5.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1886": {
+      "epg_id": "Magenta.Sport.5.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174265": {
+      "epg_id": "Magenta.Sport.6.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1885": {
+      "epg_id": "Magenta.Sport.6.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174264": {
+      "epg_id": "Magenta.Sport.7.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1884": {
+      "epg_id": "Magenta.Sport.7.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "174263": {
+      "epg_id": "Magenta.Sport.8.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1883": {
+      "epg_id": "Magenta.Sport.8.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "1882": {
+      "epg_id": "Magenta.Sport.9.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "671507": {
+      "epg_id": "Magenta.Sport.9.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "2051709": {
+      "epg_id": "SPORT.FM.TV.1.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "2051710": {
+      "epg_id": "SPORT.FM.TV.2.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "173188": {
+      "epg_id": "Eurosport.1.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "173189": {
+      "epg_id": "Eurosport.2.HD.gr",
+      "source": "epg_ripper_GR1.xml.gz"
+    },
+    "177685": {
+      "epg_id": "Sky.Sport.Uno.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177683": {
+      "epg_id": "Sky.Sport.24.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177695": {
+      "epg_id": "Sky.Sport.Calcio.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "240464": {
+      "epg_id": "Sky.Sport.Golf.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177686": {
+      "epg_id": "Sky.Sport.Arena.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177688": {
+      "epg_id": "Sky.Sport.Max.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177693": {
+      "epg_id": "Sky.Sport.F1.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177689": {
+      "epg_id": "Sky.Sport.MotoGP.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177692": {
+      "epg_id": "Sky.Sport.NBA.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "228915": {
+      "epg_id": "Sportitalia.HD.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "228924": {
+      "epg_id": "SuperTennis.HD.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167167": {
+      "epg_id": "Sky.Sport.Uno.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177687": {
+      "epg_id": "Sky.Sport.Uno.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167168": {
+      "epg_id": "Sky.Sport.24.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177690": {
+      "epg_id": "Sky.Sport.24.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167169": {
+      "epg_id": "Sky.Sport.Calcio.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177694": {
+      "epg_id": "Sky.Sport.Calcio.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167170": {
+      "epg_id": "Sky.Sport.Golf.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "240463": {
+      "epg_id": "Sky.Sport.Golf.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167171": {
+      "epg_id": "Sky.Sport.Arena.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177696": {
+      "epg_id": "Sky.Sport.Arena.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167172": {
+      "epg_id": "Sky.Sport.Max.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177697": {
+      "epg_id": "Sky.Sport.Max.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167173": {
+      "epg_id": "Sky.Sport.F1.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177699": {
+      "epg_id": "Sky.Sport.F1.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167177": {
+      "epg_id": "Sky.Sport.MotoGP.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177700": {
+      "epg_id": "Sky.Sport.MotoGP.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167175": {
+      "epg_id": "Sky.Sport.Tennis.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167174": {
+      "epg_id": "Sky.Sport.Tennis.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "1167176": {
+      "epg_id": "Sky.Sport.NBA.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "177701": {
+      "epg_id": "Sky.Sport.NBA.it",
+      "source": "epg_ripper_IT1.xml.gz"
+    },
+    "897409": {
+      "epg_id": "M+.LALIGA.TV.3.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897410": {
+      "epg_id": "LaLiga.TV.Hypermotion.2.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897411": {
+      "epg_id": "LaLiga.TV.Hypermotion.2.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897412": {
+      "epg_id": "LaLiga.TV.Hypermotion.3.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897413": {
+      "epg_id": "LaLiga.TV.Hypermotion.3.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587368": {
+      "epg_id": "DAZN.F1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587367": {
+      "epg_id": "DAZN.F1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587361": {
+      "epg_id": "DAZN.F1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587360": {
+      "epg_id": "DAZN.F1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587518": {
+      "epg_id": "Eurosport.1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897446": {
+      "epg_id": "Eurosport.1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897447": {
+      "epg_id": "Eurosport.1.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587516": {
+      "epg_id": "Eurosport.2.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897448": {
+      "epg_id": "Eurosport.2.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897449": {
+      "epg_id": "Eurosport.2.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "587511": {
+      "epg_id": "Real.Madrid.TV.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897453": {
+      "epg_id": "Real.Madrid.TV.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "897454": {
+      "epg_id": "Real.Madrid.TV.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "1006172": {
+      "epg_id": "Esport.3.es",
+      "source": "epg_ripper_ES1.xml.gz"
+    },
+    "902070": {
+      "epg_id": "TSN.1.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902071": {
+      "epg_id": "TSN.2.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902072": {
+      "epg_id": "TSN.3.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902073": {
+      "epg_id": "TSN.4.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902074": {
+      "epg_id": "TSN.5.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902076": {
+      "epg_id": "TVA.Sports.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902077": {
+      "epg_id": "TVA.Sports.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902075": {
+      "epg_id": "TVA.Sports.2.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902084": {
+      "epg_id": "Sportsnet.World.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902080": {
+      "epg_id": "Sportsnet.One.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902079": {
+      "epg_id": "Sportsnet.East.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902083": {
+      "epg_id": "Sportsnet.West.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902078": {
+      "epg_id": "Sportsnet.360.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902081": {
+      "epg_id": "Sportsnet.Ontario.HD.ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "902082": {
+      "epg_id": "Sportsnet.(Pacific).ca2",
+      "source": "epg_ripper_CA2.xml.gz"
+    },
+    "694": {
+      "epg_id": "SPORTS.TV.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988868": {
+      "epg_id": "Beinsports.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988875": {
+      "epg_id": "Beinsports.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988882": {
+      "epg_id": "Beinsports.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988869": {
+      "epg_id": "Beinsports.3.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988876": {
+      "epg_id": "Beinsports.3.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988883": {
+      "epg_id": "Beinsports.3.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988870": {
+      "epg_id": "Beinsports.4.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988877": {
+      "epg_id": "Beinsports.4.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988884": {
+      "epg_id": "Beinsports.4.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988865": {
+      "epg_id": "beIN.SPORTS.HABER.HD.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988866": {
+      "epg_id": "beIN.SPORTS.HABER.HD.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988854": {
+      "epg_id": "Beinsports.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988855": {
+      "epg_id": "Beinsports.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988856": {
+      "epg_id": "Beinsports.3.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988857": {
+      "epg_id": "Beinsports.3.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988858": {
+      "epg_id": "Beinsports.4.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "988859": {
+      "epg_id": "Beinsports.4.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "711": {
+      "epg_id": "SSport.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "708": {
+      "epg_id": "EUROSPORT.1.HD.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "18635": {
+      "epg_id": "FIGHTBOX.HD.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "18638": {
+      "epg_id": "SSport.2.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "700": {
+      "epg_id": "EUROSPORT.1.HD.tr",
+      "source": "epg_ripper_TR1.xml.gz"
+    },
+    "1100": {
+      "epg_id": "Arena.Sport.1.HD.(RS).rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1098": {
+      "epg_id": "Arena.Sport.2.HD.(RS).rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1096": {
+      "epg_id": "Arena.Sport.3.HD.(RS).rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1094": {
+      "epg_id": "Arena.Sport.4.HD.(RS).rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1093": {
+      "epg_id": "Arena.Sport.5.HD.(RS).rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1083": {
+      "epg_id": "Fight.Network.rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1082": {
+      "epg_id": "Fight.Box.rs",
+      "source": "epg_ripper_RS1.xml.gz"
+    },
+    "1115": {
+      "epg_id": "Arena.Sport.1.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1114": {
+      "epg_id": "Arena.Sport.2.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1113": {
+      "epg_id": "Arena.Sport.3.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1112": {
+      "epg_id": "Arena.Sport.4.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1111": {
+      "epg_id": "Arena.Sport.5.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1110": {
+      "epg_id": "Arena.Sport.6.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558961": {
+      "epg_id": "Arena.Sport.7.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558962": {
+      "epg_id": "Arena.Sport.8.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558963": {
+      "epg_id": "Arena.Sport.9.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558964": {
+      "epg_id": "Arena.Sport.10.HD.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558967": {
+      "epg_id": "Arena.Fight.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "558969": {
+      "epg_id": "Arena.Esport.hr",
+      "source": "epg_ripper_HR1.xml.gz"
+    },
+    "1444092": {
+      "epg_id": "Digi.4K.ro",
+      "source": "epg_ripper_RO1.xml.gz"
+    },
+    "1444099": {
+      "epg_id": "Prima.Sport.1.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444098": {
+      "epg_id": "Prima.Sport.1.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444097": {
+      "epg_id": "Prima.Sport.1.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444102": {
+      "epg_id": "Prima.Sport.2.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444101": {
+      "epg_id": "Prima.Sport.2.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444120": {
+      "epg_id": "TVR.Sport.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "1444121": {
+      "epg_id": "Sport.Extra.(HD).ro",
+      "source": "epg_ripper_RO2.xml.gz"
+    },
+    "960450": {
+      "epg_id": "\u010cT.sport.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "960457": {
+      "epg_id": "\u010cT.sport.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961101": {
+      "epg_id": "Nova.Sport.1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961127": {
+      "epg_id": "Nova.Sport.1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961102": {
+      "epg_id": "Nova.Sport.2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961128": {
+      "epg_id": "Nova.Sport.2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961103": {
+      "epg_id": "Nova.Sport.3.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961104": {
+      "epg_id": "Nova.Sport.4.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961105": {
+      "epg_id": "Nova.Sport.5.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961108": {
+      "epg_id": "Sport1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961119": {
+      "epg_id": "Sport1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961109": {
+      "epg_id": "Sport2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961120": {
+      "epg_id": "Sport2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961113": {
+      "epg_id": "JOJ.\u0160port.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961110": {
+      "epg_id": "Eurosport.1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961124": {
+      "epg_id": "Eurosport.1.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961111": {
+      "epg_id": "Eurosport.2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961125": {
+      "epg_id": "Eurosport.2.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961116": {
+      "epg_id": "Golf.Channel.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961117": {
+      "epg_id": "Auto.Motor.Sport.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "961126": {
+      "epg_id": "FightBox.cz",
+      "source": "epg_ripper_CZ1.xml.gz"
+    },
+    "3190": {
+      "epg_id": "Eurosport.2.HD.hu",
+      "source": "epg_ripper_HU1.xml.gz"
+    },
+    "3137": {
+      "epg_id": "Sport1.hu",
+      "source": "epg_ripper_HU1.xml.gz"
+    },
+    "3136": {
+      "epg_id": "Sport2.hu",
+      "source": "epg_ripper_HU1.xml.gz"
+    },
+    "1729134": {
+      "epg_id": "CANAL+.Sport.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729135": {
+      "epg_id": "CANAL+.Sport.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729136": {
+      "epg_id": "CANAL+.Sport.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729137": {
+      "epg_id": "CANAL+.Sport.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729138": {
+      "epg_id": "CANAL+.Sport.3.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729139": {
+      "epg_id": "CANAL+.Sport.3.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729140": {
+      "epg_id": "CANAL+.Sport.4.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729141": {
+      "epg_id": "CANAL+.Sport.4.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729142": {
+      "epg_id": "CANAL+.Sport.5.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729143": {
+      "epg_id": "CANAL+.Sport.5.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729146": {
+      "epg_id": "CANAL+.EXTRA.1.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729147": {
+      "epg_id": "CANAL+.EXTRA.1.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729148": {
+      "epg_id": "CANAL+.EXTRA.2.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729149": {
+      "epg_id": "CANAL+.EXTRA.2.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729150": {
+      "epg_id": "CANAL+.EXTRA.3.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729151": {
+      "epg_id": "CANAL+.EXTRA.3.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729152": {
+      "epg_id": "CANAL+.EXTRA.4.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729153": {
+      "epg_id": "CANAL+.EXTRA.4.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729154": {
+      "epg_id": "CANAL+.EXTRA.5.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729155": {
+      "epg_id": "CANAL+.EXTRA.5.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729156": {
+      "epg_id": "CANAL+.EXTRA.6.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729157": {
+      "epg_id": "CANAL+.EXTRA.6.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729158": {
+      "epg_id": "CANAL+.EXTRA.7.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729159": {
+      "epg_id": "CANAL+.EXTRA.7.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729166": {
+      "epg_id": "Polsat.Sport.Fight.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729167": {
+      "epg_id": "Polsat.Sport.Fight.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729170": {
+      "epg_id": "Polsat.Sport.Premium.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729171": {
+      "epg_id": "Polsat.Sport.Premium.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729172": {
+      "epg_id": "Polsat.Sport.Premium.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729173": {
+      "epg_id": "Polsat.Sport.Premium.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729190": {
+      "epg_id": "TVP.Sport.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729191": {
+      "epg_id": "TVP.Sport.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729182": {
+      "epg_id": "Eurosport.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729183": {
+      "epg_id": "Eurosport.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729184": {
+      "epg_id": "Eurosport.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729185": {
+      "epg_id": "Eurosport.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729192": {
+      "epg_id": "Sportklub.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729193": {
+      "epg_id": "Sportklub.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729198": {
+      "epg_id": "Fightklub.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729199": {
+      "epg_id": "Fightklub.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729196": {
+      "epg_id": "FightBox.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729197": {
+      "epg_id": "FightBox.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729205": {
+      "epg_id": "Sportowa.TV.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729202": {
+      "epg_id": "Gametoon.HD.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729203": {
+      "epg_id": "E-SPORT.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729221": {
+      "epg_id": "Eleven.Sports.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729222": {
+      "epg_id": "Eleven.Sports.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729223": {
+      "epg_id": "Eleven.Sports.1.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729224": {
+      "epg_id": "Eleven.Sports.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729225": {
+      "epg_id": "Eleven.Sports.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729226": {
+      "epg_id": "Eleven.Sports.2.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729227": {
+      "epg_id": "Eleven.Sports.3.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729228": {
+      "epg_id": "Eleven.Sports.3.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729229": {
+      "epg_id": "Eleven.Sports.3.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729230": {
+      "epg_id": "Eleven.Sports.4.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729231": {
+      "epg_id": "Eleven.Sports.4.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "1729232": {
+      "epg_id": "Eleven.Sports.4.pl",
+      "source": "epg_ripper_PL1.xml.gz"
+    },
+    "959328": {
+      "epg_id": "Canal.11.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959329": {
+      "epg_id": "Canal.11.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959330": {
+      "epg_id": "Canal.11.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959331": {
+      "epg_id": "Canal.11.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959333": {
+      "epg_id": "SPORT.TV+.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959334": {
+      "epg_id": "SPORT.TV+.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959335": {
+      "epg_id": "SPORT.TV+.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959336": {
+      "epg_id": "SPORT.TV+.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959337": {
+      "epg_id": "SPORT.TV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959338": {
+      "epg_id": "SPORT.TV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959339": {
+      "epg_id": "SPORT.TV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959340": {
+      "epg_id": "SPORT.TV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959341": {
+      "epg_id": "SPORT.TV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959342": {
+      "epg_id": "SPORT.TV2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959343": {
+      "epg_id": "SPORT.TV2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959344": {
+      "epg_id": "SPORT.TV2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959345": {
+      "epg_id": "SPORT.TV2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959346": {
+      "epg_id": "SPORT.TV3.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959347": {
+      "epg_id": "SPORT.TV3.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959348": {
+      "epg_id": "SPORT.TV3.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959349": {
+      "epg_id": "SPORT.TV3.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959350": {
+      "epg_id": "SPORT.TV4.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959351": {
+      "epg_id": "SPORT.TV4.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959352": {
+      "epg_id": "SPORT.TV4.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959353": {
+      "epg_id": "SPORT.TV4.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959354": {
+      "epg_id": "SPORT.TV5.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959355": {
+      "epg_id": "SPORT.TV5.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959356": {
+      "epg_id": "SPORT.TV5.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959357": {
+      "epg_id": "SPORT.TV5.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959358": {
+      "epg_id": "Sport.TV.6.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959359": {
+      "epg_id": "Sport.TV.6.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959360": {
+      "epg_id": "Sport.TV.6.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959361": {
+      "epg_id": "Sport.TV.6.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959362": {
+      "epg_id": "Sport.TV.7.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959363": {
+      "epg_id": "Sport.TV.7.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959364": {
+      "epg_id": "Sport.TV.7.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959428": {
+      "epg_id": "BTV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959429": {
+      "epg_id": "BTV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959431": {
+      "epg_id": "BTV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959430": {
+      "epg_id": "BTV1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959433": {
+      "epg_id": "Sporting.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959434": {
+      "epg_id": "Sporting.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959435": {
+      "epg_id": "Sporting.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959436": {
+      "epg_id": "Sporting.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959437": {
+      "epg_id": "Eurosport.1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959438": {
+      "epg_id": "Eurosport.1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959439": {
+      "epg_id": "Eurosport.1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959440": {
+      "epg_id": "Eurosport.1.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959441": {
+      "epg_id": "Eurosport.2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959442": {
+      "epg_id": "Eurosport.2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959443": {
+      "epg_id": "Eurosport.2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959444": {
+      "epg_id": "Eurosport.2.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959446": {
+      "epg_id": "A.Bola.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959447": {
+      "epg_id": "Fuel.TV.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959451": {
+      "epg_id": "Motorvision.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959452": {
+      "epg_id": "Motorvision.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959449": {
+      "epg_id": "Fight.Network.HD.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "959453": {
+      "epg_id": "W-Sport.pt",
+      "source": "epg_ripper_PT1.xml.gz"
+    },
+    "242232": {
+      "epg_id": "Alkass_1_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "712436": {
+      "epg_id": "Alkass_1_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "242231": {
+      "epg_id": "Alkass_2_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "712437": {
+      "epg_id": "Alkass_2_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "242229": {
+      "epg_id": "Alkass_3_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "712438": {
+      "epg_id": "Alkass_3_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "242230": {
+      "epg_id": "Alkass_4_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "712439": {
+      "epg_id": "Alkass_4_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "242228": {
+      "epg_id": "Alkass_5_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "712440": {
+      "epg_id": "Alkass_5_AR.bein",
+      "source": "epg_ripper_BEIN1.xml.gz"
+    },
+    "660661": {
+      "epg_id": "Dubai.Sports.1.ae",
+      "source": "epg_ripper_AE1.xml.gz"
+    },
+    "660653": {
+      "epg_id": "AD.Sports.1.HD.ae",
+      "source": "epg_ripper_AE1.xml.gz"
+    },
+    "660654": {
+      "epg_id": "AD.Sports.2.HD.ae",
+      "source": "epg_ripper_AE1.xml.gz"
+    },
+    "382840": {
+      "epg_id": "Now.Sports.4.hk",
+      "source": "epg_ripper_HK1.xml.gz"
+    },
+    "382839": {
+      "epg_id": "Now.Sports.5.hk",
+      "source": "epg_ripper_HK1.xml.gz"
+    },
+    "382838": {
+      "epg_id": "Now.Sports.6.hk",
+      "source": "epg_ripper_HK1.xml.gz"
+    },
+    "382837": {
+      "epg_id": "Now.Sports.7.hk",
+      "source": "epg_ripper_HK1.xml.gz"
+    },
+    "1058937": {
+      "epg_id": "beIN.Sports.1.HD.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058938": {
+      "epg_id": "beIN.Sports.2.HD.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058939": {
+      "epg_id": "beIN.Sports.3.HD.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058940": {
+      "epg_id": "beIN.SPORTS.4.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058941": {
+      "epg_id": "beIN.SPORTS.5.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058972": {
+      "epg_id": "Soccer.Channel.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058973": {
+      "epg_id": "Sportstars.2.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058975": {
+      "epg_id": "SPOTV.2.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "1058974": {
+      "epg_id": "SPOTV.id",
+      "source": "epg_ripper_ID1.xml.gz"
+    },
+    "901300": {
+      "epg_id": "One.Sports+.ph",
+      "source": "epg_ripper_PH2.xml.gz"
+    },
+    "901296": {
+      "epg_id": "Premier.Sports.HD.ph",
+      "source": "epg_ripper_PH2.xml.gz"
+    },
+    "901291": {
+      "epg_id": "Tap.Sports.ph",
+      "source": "epg_ripper_PH2.xml.gz"
+    },
+    "383543": {
+      "epg_id": "beIN.SPORTS.(HD).sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383542": {
+      "epg_id": "beIN.SPORTS.2.(HD).sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383544": {
+      "epg_id": "beIN.SPORTS.3.(HD).sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383522": {
+      "epg_id": "Premier.Sports.sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383500": {
+      "epg_id": "Hub.Sports.1.HD.sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383440": {
+      "epg_id": "SPOTV.2.(HD).sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383438": {
+      "epg_id": "SPOTV.(HD).sg",
+      "source": "epg_ripper_SG1.xml.gz"
+    },
+    "383057": {
+      "epg_id": "Golf.Channel.my",
+      "source": "epg_ripper_MY1.xml.gz"
+    },
+    "383054": {
+      "epg_id": "Astro.Arena.my",
+      "source": "epg_ripper_MY1.xml.gz"
+    },
+    "383051": {
+      "epg_id": "beIN.SPORTS.3.my",
+      "source": "epg_ripper_MY1.xml.gz"
+    },
+    "383044": {
+      "epg_id": "beIN.SPORTS.2.my",
+      "source": "epg_ripper_MY1.xml.gz"
+    },
+    "901435": {
+      "epg_id": "Band.Sports.br",
+      "source": "epg_ripper_BR2.xml.gz"
+    },
+    "901427": {
+      "epg_id": "SporTV.2.br",
+      "source": "epg_ripper_BR2.xml.gz"
+    },
+    "901428": {
+      "epg_id": "SporTV.3.br",
+      "source": "epg_ripper_BR2.xml.gz"
+    },
+    "901426": {
+      "epg_id": "SporTV.br",
+      "source": "epg_ripper_BR2.xml.gz"
+    },
+    "1090674": {
+      "epg_id": "DSPORTS.(ARG).dtvsp",
+      "source": "epg_ripper_DIRECTVSPORTS1.xml.gz"
+    },
+    "3371": {
+      "epg_id": "TV.2.Sport.dk",
+      "source": "epg_ripper_DK1.xml.gz"
+    },
+    "3364": {
+      "epg_id": "TV3.SPORT.dk",
+      "source": "epg_ripper_DK1.xml.gz"
+    },
+    "3338": {
+      "epg_id": "Eurosport.1.dk",
+      "source": "epg_ripper_DK1.xml.gz"
+    },
+    "3337": {
+      "epg_id": "Eurosport.2.dk",
+      "source": "epg_ripper_DK1.xml.gz"
+    },
+    "244131": {
+      "epg_id": "Eurosport.1.fi",
+      "source": "epg_ripper_FI1.xml.gz"
+    },
+    "244123": {
+      "epg_id": "V.Sport.Golf.fi",
+      "source": "epg_ripper_FI1.xml.gz"
+    },
+    "244122": {
+      "epg_id": "V.Sport.Football.fi",
+      "source": "epg_ripper_FI1.xml.gz"
+    },
+    "244121": {
+      "epg_id": "V.Sport.1.fi",
+      "source": "epg_ripper_FI1.xml.gz"
+    },
+    "244119": {
+      "epg_id": "Eurosport.2.fi",
+      "source": "epg_ripper_FI1.xml.gz"
+    }
+  }
+}
